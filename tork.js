@@ -296,7 +296,7 @@
    return match_token(type_divide_assign, idx + 1)
   else if(glyph == type_forward_slash)
   {
-   while(glyphs[idx] != type_newline)
+   while(glyphs[++idx] != type_newline)
     continue 
    return match_token(type_comment, idx)
   }
