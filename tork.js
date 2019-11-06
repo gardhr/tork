@@ -296,7 +296,7 @@
    return match_token(type_divide_assign, idx + 1)
   else if(glyph == type_forward_slash)
   {
-   while(glyphs[++idx] != type_newline)
+   while(glyphs[idx] != type_newline)
     continue 
    return match_token(type_comment, idx)
   }
@@ -484,6 +484,7 @@
    unidentified = -1,
    identifier_index = unidentified
   glyphs = text_to_array(text)
+  glyphs.push(type_newline)
   var count = glyphs.length
   tokens.glyphs = glyphs
   while(current < count)
@@ -553,7 +554,7 @@ function process(file)
 }
 
 escape(function(){
- display("Torq!")
+ display("Tork!")
  display("Usage:", script_path(), "[files...]")
  var 
   set = {},
