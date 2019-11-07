@@ -148,7 +148,7 @@
    tab[type_greater_or_equal] = "greater_or_equal"
    tab[type_shift_right] = "shift_right"
    tab[type_shift_right_assign] = "shift_right_assign"
-   tab[type_declaror] = "declaror"
+   tab[type_dollar] = "dollar"
    tab[type_colon] = "colon"
    tab[type_semicolon] = "semicolon"
    tab[type_conditional] = "conditional"
@@ -465,7 +465,7 @@
  tokenizers[type_dot] = match_dot
  tokenizers[type_tilde] = matched
  tokenizers[type_pound] = matched
- tokenizers[type_declaror] = matched
+ tokenizers[type_dollar] = matched
  tokenizers[type_left_paren] = matched
  tokenizers[type_right_paren] = matched
  tokenizers[type_left_brace] = matched
