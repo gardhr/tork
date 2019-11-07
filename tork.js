@@ -1,3 +1,7 @@
+ function char(text)
+ {
+  return text.charAt(0)
+ }
  var
   slot = 0x80,
   type_undefined = slot++,
@@ -5,10 +9,10 @@
   type_unexpected_end_of_input = slot++, 
   type_identifier = slot++,
   type_comment = slot++,
-  type_quote = slot++,
   type_backslash = 0x5c,
   type_forward_slash = 0x2f,
   type_asterisk = 0x2a,
+  type_quote = slot++,
   type_single_quote = 0x27,
   type_double_quote = 0x22,
   type_left_brace = 0x7b,
@@ -446,6 +450,7 @@
  tokenizers[type_digit_seven] = match_integer
  tokenizers[type_digit_eight] = match_integer
  tokenizers[type_digit_nine] = match_integer
+ tokenizers[type_equal_assign] = match_equal
  tokenizers[type_not] = match_not
  tokenizers[type_at] = matched // FIXME
  tokenizers[type_modulus] = match_modulus
