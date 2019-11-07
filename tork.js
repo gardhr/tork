@@ -559,7 +559,7 @@ function process(file)
 }
 
 contain(function(){
- display("Tork?")
+ display("TORK")
  display("Usage:", script_path(), "[files...]")
  var  args = script_arguments()
  loop(args, function(idx){
