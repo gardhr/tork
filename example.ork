@@ -1,4 +1,7 @@
-function magnitude x y z 
- (x^2 + y^2 + z^2)^1/2
-end
+function magnitude x y z do (x^2 + y^2 + z^2)^1/2
+print (magnitude 3 4 5)
+new pos exp 1
+print (magnitude pos pos pos)
+
+
 
