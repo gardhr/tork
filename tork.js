@@ -338,7 +338,7 @@
   else if(glyph == type_less)
   {
    glyph = glyphs[idx + 1]
-   if(glyph == type_equal_assign)  
+   if(glyph == type_equals)  
     return match_token(type_shift_left_assign, idx + 2)
    return match_token(type_shift_left, idx + 1)    
   }
@@ -354,7 +354,7 @@
   else if(glyph == type_greater)
   {
    glyph = glyphs[idx + 1]
-   if(glyph == type_equal_assign)  
+   if(glyph == type_equals)  
     return match_token(type_shift_right_assign, idx + 2)    
    return match_token(type_shift_right, idx + 1)    
   }
