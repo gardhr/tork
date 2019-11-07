@@ -6,7 +6,7 @@
  var
   slot = 128,
   type_undefined = slot++,
-  type_end_of_input = type_undefined,
+  type_end_of_input = slot++,
   type_unexpected_end_of_input = slot++, 
   type_identifier = slot++,
   type_comment = slot++,
