@@ -567,9 +567,7 @@ function process(file)
 escape(function(){
  display("Tork!")
  display("Usage:", script_path(), "[files...]")
- var 
-  set = {},
-  args = script_arguments()
+ var args = script_arguments()
  loop(args, function(idx){
   var arg = args[idx]
   display(arg)
