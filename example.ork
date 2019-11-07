@@ -1,6 +1,6 @@
 function magnitude x y z is (x^2 + y^2 + z^2)^1/2
 print (magnitude 3 4 5)
-new pos exp 1
+new pos 8 * atan 1
 print (magnitude pos pos pos)
 
 
