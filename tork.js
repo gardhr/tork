@@ -377,10 +377,20 @@
   return match_token(type_ellipsis, idx + 2)    
  }
 
+ function crlf(idx)
+ {
+  var glyph = glyphs[idx]
+  return (glyph == type_newline) ||
+   (glyph == type_linefeed)
+ }
+
  function match_newlines(idx)
  {
-  while(glyphs[++idx] == type_newline)
-   continue
+  if(!crlf(idx))
+   return 0    
+  while(true)
+   if(!clrf(++idx))
+    break
   return match_token(type_newline, idx)
  }
 
@@ -452,7 +462,7 @@
  tokenizers[type_digit_nine] = match_integer
  tokenizers[type_equal_assign] = match_equal
  tokenizers[type_not] = match_not
- tokenizers[type_at] = matched // FIXME
+ tokenizers[type_at] = matched // TODO
  tokenizers[type_modulus] = match_modulus
  tokenizers[type_xor] = match_xor
  tokenizers[type_and] = match_and
