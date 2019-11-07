@@ -392,7 +392,7 @@
 
  function match_spaces(idx)
  {
-  while(isspace(glyphs[++idx]))
+  while(glyphs[++idx] == type_space)
    continue
   return match_token(type_space, idx)
  }
