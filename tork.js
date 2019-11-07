@@ -24,7 +24,7 @@
   type_right_bracket = char("]"),
   type_not = char("!"),
   type_not_equal = slot++,
-  type_xor = char("^"),
+  type_caret = char("^"),
   type_xor_assign = slot++,
   type_and = char("&"),
   type_and_assign = slot++,
@@ -120,7 +120,7 @@
    tab[type_right_bracket] = "right_bracket"
    tab[type_not] = "not"
    tab[type_not_equal] = "not_equal"
-   tab[type_xor] = "xor"
+   tab[type_caret] = "caret"
    tab[type_xor_assign] = "xor_assign"
    tab[type_and] = "and"
    tab[type_and_assign] = "and_assign"
@@ -225,7 +225,7 @@
   return match_token(type_modulus, idx)
  }
 
- function match_xor(idx)
+ function match_caret(idx)
  {
   if(glyphs[++idx] == type_equal_assign)
    return match_token(type_xor_assign, idx + 1)
@@ -460,7 +460,7 @@
  tokenizers[type_not] = match_not
  tokenizers[type_at] = matched // TODO
  tokenizers[type_modulus] = match_modulus
- tokenizers[type_xor] = match_xor
+ tokenizers[type_caret] = match_caret
  tokenizers[type_and] = match_and
  tokenizers[type_times] = match_times
  tokenizers[type_minus] = match_minus
@@ -567,7 +567,7 @@ function process(file)
 escape(function(){
  display("Tork!")
  display("Usage:", script_path(), "[files...]")
- var args = script_arguments()
+ var  args = script_arguments()
  loop(args, function(idx){
   var arg = args[idx]
   display(arg)
@@ -575,3 +575,4 @@ escape(function(){
  })
  display("Done!")
 })
+    
