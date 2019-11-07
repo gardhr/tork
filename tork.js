@@ -52,7 +52,7 @@
   type_greater_or_equal = slot++,
   type_shift_right = slot++,
   type_shift_right_assign = slot++,
-  type_declaror = 0x24,
+  type_dollar = 0x24,
   type_colon = 0x3a,
   type_semicolon = 0x3b,
   type_conditional = 0x3f,
@@ -176,11 +176,6 @@
  {
   return idx >= glyphs.length
  }
-
- function at_end_of_line(idx)
- {
-  return eof(idx) || glyphs[idx] == type_linefeed
- }
   
  function match_quote(quote, idx)
  {
@@ -300,7 +295,7 @@
    return match_token(type_divide_assign, idx + 1)
   else if(glyph == type_forward_slash)
   {
-   while(glyphs[++idx] != type_newline)
+   while(!crlf(++idx))
     continue 
    return match_token(type_comment, idx)
   }
@@ -389,7 +384,7 @@
   if(!crlf(idx))
    return 0    
   while(true)
-   if(!clrf(++idx))
+   if(!crlf(++idx))
     break
   return match_token(type_newline, idx)
  }
