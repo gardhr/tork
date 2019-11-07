@@ -519,8 +519,7 @@
     })
     identifier_index = unidentified 
    } 
-   var
-    length = scan(current) - current
+   var length = scan(current) - current
    if(typed != type_space)
    {
     tokens.push({
