@@ -25,7 +25,7 @@
   type_not = char("!"),
   type_not_equal = slot++,
   type_caret = char("^"),
-  type_xor_assign = slot++,
+  type_caret_assign = slot++,
   type_and = char("&"),
   type_and_assign = slot++,
   type_and_logical = slot++,
@@ -121,7 +121,7 @@
    tab[type_not] = "not"
    tab[type_not_equal] = "not_equal"
    tab[type_caret] = "caret"
-   tab[type_xor_assign] = "xor_assign"
+   tab[type_caret_assign] = "caret_assign"
    tab[type_and] = "and"
    tab[type_and_assign] = "and_assign"
    tab[type_and_logical] = "and_logical"
@@ -228,8 +228,8 @@
  function match_caret(idx)
  {
   if(glyphs[++idx] == type_equal_assign)
-   return match_token(type_xor_assign, idx + 1)
-  return match_token(type_xor, idx)
+   return match_token(type_caret_assign, idx + 1)
+  return match_token(type_caret, idx)
  }
 
  function match_and(idx)
