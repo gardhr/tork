@@ -43,8 +43,8 @@
   type_divide_assign = slot++,
   type_modulus = char("%"),
   type_modulus_assign = slot++,
-  type_equal_assign = char("="),
-  type_equal = slot++,
+  type_equals = char("="),
+  type_equals_equals = slot++,
   type_less = char("<"),
   type_less_or_equal = slot++,
   type_shift_left = slot++,
@@ -139,8 +139,8 @@
    tab[type_divide_assign] = "divide_assign"
    tab[type_modulus] = "modulus"
    tab[type_modulus_assign] = "modulus_assign"
-   tab[type_equal_assign] = "equal_assign"
-   tab[type_equal] = "equal"
+   tab[type_equals_equals] = "equals_equals"
+   tab[type_equals] = "equals"
    tab[type_less] = "less"
    tab[type_less_or_equal] = "less_or_equal"
    tab[type_shift_left] = "shift_left"
@@ -204,30 +204,30 @@
   return match_quote(type_double_quote, idx)
  }
  
- function match_equal(idx)
+ function match_equals(idx)
  {
-  if(glyphs[++idx] == type_equal_assign)
-   return match_token(type_equal, idx + 1)
-  return match_token(type_equal_assign, idx)
+  if(glyphs[++idx] == type_equals)
+   return match_token(type_equals_equals, idx + 1)
+  return match_token(type_equals, idx)
  }
 
  function match_not(idx)
  {
-  if(glyphs[++idx] == type_equal_assign)
+  if(glyphs[++idx] == type_equals)
    return match_token(type_not_equal, idx + 1)
   return match_token(type_not, idx)
  }
 
  function match_modulus(idx)
  {
-  if(glyphs[++idx] == type_equal_assign)
+  if(glyphs[++idx] == type_equals)
    return match_token(type_modulus_assign, idx + 1)
   return match_token(type_modulus, idx)
  }
 
  function match_caret(idx)
  {
-  if(glyphs[++idx] == type_equal_assign)
+  if(glyphs[++idx] == type_equals)
    return match_token(type_caret_assign, idx + 1)
   return match_token(type_caret, idx)
  }
@@ -238,7 +238,7 @@
    glyph = glyphs[++idx]
   if(glyph == type_and)
    return match_token(type_and_logical, idx + 1)
-  else if(glyph == type_equal_assign)
+  else if(glyph == type_equals)
    return match_token(type_and_assign, idx + 1)    
   return match_token(type_and, idx)
  }
@@ -249,14 +249,14 @@
    glyph = glyphs[++idx]
   if(glyph == type_or)
    return match_token(type_or_logical, idx + 1)
-  else if(glyph == type_equal_assign)
+  else if(glyph == type_equals)
    return match_token(type_or_assign, idx + 1)    
   return match_token(type_or, idx)
  }
 
  function match_times(idx)
  {
-  if(glyphs[++idx] == type_equal_assign)
+  if(glyphs[++idx] == type_equals)
    return match_token(type_times_assign, idx + 1)
   return match_token(type_times, idx)
  }
@@ -292,7 +292,7 @@
  {
   var
    glyph = glyphs[++idx]
-  if(glyph == type_equal_assign)
+  if(glyph == type_equals)
    return match_token(type_divide_assign, idx + 1)
   else if(glyph == type_forward_slash)
   {
@@ -311,7 +311,7 @@
  {
   var
    glyph = glyphs[++idx]
-  if(glyph == type_equal_assign)
+  if(glyph == type_equals)
    return match_token(type_minus_assign, idx + 1)
   else if(glyph == type_minus)
    return match_token(type_minus_minus, idx + 1)
@@ -322,7 +322,7 @@
  {
   var
    glyph = glyphs[++idx]
-  if(glyph == type_equal_assign)
+  if(glyph == type_equals)
    return match_token(type_plus_assign, idx + 1)
   else if(glyph == type_plus)
    return match_token(type_plus_plus, idx + 1)    
@@ -333,7 +333,7 @@
  {
   var
    glyph = glyphs[++idx]
-  if(glyph == type_equal_assign)
+  if(glyph == type_equals)
    return match_token(type_less_or_equal, idx + 1)
   else if(glyph == type_less)
   {
@@ -349,7 +349,7 @@
  {
   var
    glyph = glyphs[++idx]
-  if(glyph == type_equal_assign)
+  if(glyph == type_equals)
    return match_token(type_greater_or_equal, idx + 1)
   else if(glyph == type_greater)
   {
@@ -456,7 +456,7 @@
  tokenizers[type_digit_seven] = match_integer
  tokenizers[type_digit_eight] = match_integer
  tokenizers[type_digit_nine] = match_integer
- tokenizers[type_equal_assign] = match_equal
+ tokenizers[type_equals] = match_equals
  tokenizers[type_not] = match_not
  tokenizers[type_at] = matched // TODO
  tokenizers[type_modulus] = match_modulus
