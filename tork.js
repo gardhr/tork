@@ -510,8 +510,6 @@
     ++current
     continue
    }
-   var
-    length = scan(current) - current
    if(marked)
    {
     tokens.push({
@@ -521,6 +519,8 @@
     })
     identifier_index = unidentified 
    } 
+   var
+    length = scan(current) - current
    if(typed != type_space)
    {
     tokens.push({
