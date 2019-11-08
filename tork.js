@@ -562,11 +562,12 @@ contain(function(){
  print("TORK")
  print("Usage:", script_path(), "[files...]")
  var  args = script_arguments()
- loop(args, function(idx){
+ for(var idx in args)
+ {
   var arg = args[idx]
   print(arg)
   process(arg)
- })
+ }
  print("Done!")
 })
     
