@@ -543,7 +543,7 @@ function process(file)
 {
  var text = file_to_text(file)
  if(text == null)
-  return display("Error: cannot open file '", file, "'")
+  return print("Error: cannot open file '", file, "'")
  var tokens = tokenize(text)
  for(var tdx = 0, len = tokens.length; tdx < len; ++tdx)
  {
@@ -554,19 +554,19 @@ function process(file)
     token.index, 
     token.index + token.length 
    ))
-  display(type_to_text(type), "(", token.index, token.length, ") :", text)
+  print(type_to_text(type), "(", token.index, token.length, ") :", text)
  } 
 }
 
 contain(function(){
- display("TORK")
- display("Usage:", script_path(), "[files...]")
+ print("TORK")
+ print("Usage:", script_path(), "[files...]")
  var  args = script_arguments()
  loop(args, function(idx){
   var arg = args[idx]
-  display(arg)
+  print(arg)
   process(arg)
  })
- display("Done!")
+ print("Done!")
 })
     
