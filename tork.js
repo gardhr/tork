@@ -1,4 +1,8 @@
- function char(text)
+/*
+ Rough proof of concept...
+*/
+
+function char(text)
  {
   return text.charCodeAt(0)
  }
@@ -86,9 +90,11 @@
   type_digit_nine = digit++,
   type_placeholder
 
- var
-  glyphs,
-  typed 
+/*
+ Globals, for now...
+*/
+
+ var glyphs, typed 
 
  function type_to_text(type)
  {
@@ -172,6 +178,12 @@
   typed = type
   return index
  } 
+
+/*
+ Token scanners. Rarely do these need to check 
+ the first character. Exceptions include `crlf` 
+ and `match_newlines` which are used elsewhere.
+*/
 
  function eof(idx)
  {
@@ -539,12 +551,16 @@
   return tokens
  }
 
-function process(file)
+/*
+ The parser
+*/
+
+function parse(input)
 {
- var text = file_to_text(file)
- if(text == null)
-  return print("Error: cannot open file '", file, "'")
- var tokens = tokenize(text)
+ if(input instanceof String)
+  return parse(tokenize(input))
+ print("Parser")
+ var tokens = input
  for(var tdx = 0, len = tokens.length; tdx < len; ++tdx)
  {
   var token = tokens[tdx],
@@ -558,6 +574,19 @@ function process(file)
  } 
 }
 
+/*
+ Test tokenize and parse
+*/
+
+function process(file)
+{
+ var text = file_to_text(file)
+ if(text == null)
+  return print("Error: cannot open file '", file, "'")
+ var tokens = tokenize(text)
+ var code = parse(tokens)
+}
+
 contain(function(){
  print("TORK")
  print("Usage:", script_path(), "[files...]")
@@ -567,7 +596,7 @@ contain(function(){
   var arg = args[idx]
   print(arg)
   process(arg)
- }
+ } 
  print("Done!")
 })
     
