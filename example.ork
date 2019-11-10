@@ -1,7 +1,0 @@
-define magnitude x y z as (x^2 + y^2 + z^2)^1/2
-print "The magnitude is" (magnitude 3 4 5)
-var pos 8 * atan 1
-print (magnitude pos pos pos)
-
-
-
