@@ -508,10 +508,7 @@ function char(text)
 
  function tokenize(text)
  {
-  var tokens = [],
-   current = 0,
-   unidentified = -1,
-   identifier_index = unidentified
+  var tokens = [], current = 0
   glyphs = text_to_array(text)
   glyphs.push(type_newline)
   tokens.glyphs = glyphs
