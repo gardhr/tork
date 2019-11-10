@@ -442,13 +442,8 @@ function char(text)
 
  function match_identifier(idx)
  {
-  var uds = char("_")
-  while(true)
-  {
-   var g = glyphs[++idx]
-   if(!isdigit(g) && !isalpha(g) && g != uds) 
-    break
-  }
+  while(tokenizers[glyphs[++idx]] == match_identifier) 
+   continue
   return match_token(type_identifier, idx)
  }
 
@@ -519,9 +514,6 @@ function char(text)
   while(current < count)
   {
    var glyph = glyphs[current]
-/*
- TODO: handle this more gracefully
-*/
    if(glyph > 255)
     glyph = type_undefined
    var scan = tokenizers[glyph]
