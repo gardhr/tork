@@ -7,7 +7,12 @@ function char(text)
   return text.charCodeAt(0)
  }
 
+/*
+ Globals
+*/
+
  var
+  glyphs = [], 
   slot = 128,
   type_undefined = slot++,
   type_end_of_input = slot++,
@@ -79,12 +84,6 @@ function char(text)
   type_scientific = slot++,
   type_discardable = slot++,
   type_placeholder
-
-/*
- Globals, for now...
-*/
-
- var glyphs, typed 
 
  function type_to_text(type)
  {
