@@ -2,7 +2,7 @@
  Rough proof of concept...
 */
 
-function char(text)
+ function char(text)
  {
   return text.charCodeAt(0)
  }
