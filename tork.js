@@ -168,9 +168,7 @@ function char(text)
  } 
 
 /*
- Token scanners. Rarely do these need to check 
- the first character. Exceptions include `crlf` 
- and `match_newlines` which are used elsewhere.
+ Token scanners
 */
 
  function eof(idx)
@@ -296,7 +294,7 @@ function char(text)
    return match_token(type_divide_assign, idx + 1)
   else if(glyph == type_forward_slash)
   {
-   while(!crlf(++idx))
+   while(glyphs[++idx] != type_newline)
     continue 
    return match_token(type_comment, idx)
   }
@@ -373,19 +371,13 @@ function char(text)
   return match_token(type_ellipsis, idx + 2)    
  }
 
- function crlf(idx)
- {
-  var glyph = glyphs[idx]
-  return (glyph == type_newline) ||
-   (glyph == type_linefeed)
- }
 
  function match_newlines(idx)
  {
-  if(!crlf(idx))
+  if(glyphs[idx] != type_newline)
    return 0    
   while(true)
-   if(!crlf(++idx))
+   if(glyphs[++idx] != type_newline)
     break
   return match_token(type_newline, idx)
  }
