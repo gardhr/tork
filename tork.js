@@ -77,6 +77,7 @@ function char(text)
   type_hex = slot++,
   type_real = slot++,
   type_scientific = slot++,
+  type_discardable = slot++,
   type_placeholder
 
 /*
@@ -164,8 +165,7 @@ function char(text)
  
  function match_token(type, index)
  {
-  typed = type
-  return index
+  return { type: type, index: index }
  } 
 
 /*
@@ -415,9 +415,9 @@ function char(text)
  function match_digit_zero(idx)
  {
   var 
-   type_X = 0x58,
-   type_A = 0x41,
-   type_F = 0x46,
+   type_X = char("X"),
+   type_A = char("A"),
+   type_F = char("F"),
    next = glyphs[++idx]
   if(isdigit(next))
   {
@@ -462,6 +462,20 @@ function char(text)
   return match_token(type_undefined, idx + 1)
  }
 
+ function match_but_discard(idx)
+ {
+  return match_token(type_discardable, idx + 1)
+ }
+
+/*
+ TODO
+*/
+
+ function match_specials(idx)
+ {
+  return match_undefined(idx)
+ }
+
  var tokenizers = []
  for(var tdx = 0; tdx <= 255; ++tdx)
   tokenizers[tdx] = match_undefined
@@ -492,8 +506,9 @@ function char(text)
  tokenizers[type_conditional] = matched
  tokenizers[type_semicolon] = matched
  tokenizers[type_newline] = match_newlines
- tokenizers[type_tab] = match_tabs
- tokenizers[type_space] = match_spaces
+ tokenizers[type_carriage_return] = match_but_discard
+ tokenizers[type_tab] = match_but_discard
+ tokenizers[type_space] = match_but_discard
  tokenizers[type_single_quote] = match_single_quote
  tokenizers[type_double_quote] = match_double_quote
  var type_digit_zero = char("0")
@@ -509,37 +524,31 @@ function char(text)
  function tokenize(text)
  {
   var tokens = [], current = 0
-  glyphs = text_to_array(text)
-  glyphs.push(type_newline)
-  tokens.glyphs = glyphs
+  glyphs = tokens.glyphs = text_to_array(text)
   var count = glyphs.length
   while(current < count)
   {
    var glyph = glyphs[current]
-/*
- TODO: handle this more gracefully
-*/
-   if(glyph > 255)
-    glyph = type_undefined
-   var scan = tokenizers[glyph]
-   var length = scan(current) - current
-   if(typed != type_space)
-   {
+   var scan = (glyph >= 256) ? 
+    match_specials : tokenizers[glyph]
+   var result = scan(current)
+   var type = result.type 
+   var length = result.index - current
+   if(type != type_discardable)
     tokens.push({
-     type : typed,
+     type : type,
      index : current, 
      length : length
     })
-   }
    current += length
   }
   return tokens
  }
 
 /*
- The parser
+ TODO
 */
-   
+
 function parse(input)
 {
  if(input instanceof String)
@@ -555,12 +564,17 @@ function parse(input)
     token.index, 
     token.index + token.length 
    ))
-  print(type_to_text(type))//, "(", token.index, token.length, ") :", text)
+  print
+  (
+   type_to_text(type), type == type_newline ? 
+   "" : text
+  )
+//)//, "(", token.index, token.length, ") :", text)
  } 
 }
 
 /*
- Test tokenize and parse
+ Test
 */
 
 function process(file)
@@ -573,15 +587,14 @@ function process(file)
 }
 
 contain(function(){
- print("TORK")
- print("Usage:", script_path(), "[files...]")
  var  args = script_arguments()
+ if(args.length == 0)
+  print("TORK:", script_path(), "[files...]")
  for(var idx in args)
  {
   var arg = args[idx]
   print(arg)
   process(arg)
  } 
- print("Done!")
 })
     
