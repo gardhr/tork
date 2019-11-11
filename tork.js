@@ -364,14 +364,18 @@
   var
    glyph = glyphs[++idx]
   if(
-   glyph != type_dot || 
-   glyphs[idx + 1] != type_dot
+   glyph == type_dot && 
+   glyphs[idx + 1] == type_dot
   )
-   return match_token(type_dot, idx)
-  return match_token(type_ellipsis, idx + 2)    
+   return match_token(type_ellipsis, idx + 2)
+  return match_token(type_dot, idx)    
  }
 
-
+/*
+ NOTE: newlines will not be coalesced if 
+ type_linefeed's are present in the source
+*/
+ 
  function match_newlines(idx)
  {
   if(glyphs[idx] != type_newline)
@@ -386,14 +390,14 @@
  {
   while(glyphs[++idx] == type_space)
    continue
-  return match_token(type_space, idx)
+  return match_token(type_discardable, idx)
  }
 
  function match_tabs(idx)
  {
   while(glyphs[++idx] == type_tab)
    continue
-  return match_token(type_tab, idx)
+  return match_token(type_discardable, idx)
  }
 
  function match_integer(idx)
@@ -423,7 +427,7 @@
   for(;;)
   {
    next = toupper(glyphs[++idx])
-   if(!isdigit(next) && (next < type_A || next > type_F))
+   if(!isdigit(next) || next < type_A || next > type_F)
     break
   }
   if(idx == start)
@@ -498,8 +502,8 @@
  tokenizers[type_semicolon] = matched
  tokenizers[type_newline] = match_newlines
  tokenizers[type_carriage_return] = match_but_discard
- tokenizers[type_tab] = match_but_discard
- tokenizers[type_space] = match_but_discard
+ tokenizers[type_tab] = match_tabs
+ tokenizers[type_space] = match_spaces
  tokenizers[type_single_quote] = match_single_quote
  tokenizers[type_double_quote] = match_double_quote
  var type_digit_zero = char("0")
