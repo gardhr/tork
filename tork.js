@@ -12,6 +12,7 @@
 */
 
  var
+  magic = 6,
   glyphs = [], 
   slot = 128,
   type_undefined = slot++,
@@ -435,15 +436,47 @@
   return match_token(type_hex, idx)
  }
 
+ function token(pos, idx, lim)
+ {
+  var res = ""
+  var len = idx - pos
+  var rnc = len > lim ? lim : len
+  for(var rdx = pos, rmx = pos + rnc; rdx < rmx; ++rdx)
+   res += String.fromCharCode(glyphs[rdx])   
+  return res
+ }
+
+ function signature(text)
+ {
+  var sig = 0, len = text.length
+  if(len > magic)
+   len = magic
+  for(var tdx = 0; tdx < len; ++tdx)
+  {
+   sig <<= 8
+   sig += text.charCodeAt(tdx)
+  }
+  return sig
+ }
+
  function match_identifier(idx)
  {
+  var pos = idx
   var uds = char("_")
   while(true)
   {
-   var g = glyphs[++idx]
-   if(!isdigit(g) && !isalpha(g) && g != uds) 
+   var ch = glyphs[++idx]
+   if(!isdigit(ch) && !isalpha(ch) && uds != ch) 
     break
   }
+  var res = token(pos, idx, 6)
+
+
+
+  print(res, signature(res))
+
+
+
   return match_token(type_identifier, idx)
  }
 
@@ -559,7 +592,7 @@ function parse(input)
     token.index, 
     token.index + token.length 
    ))
-  print
+  if(false)print
   (
    type_to_text(type), type == type_newline ? 
    "" : text
