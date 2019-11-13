@@ -675,8 +675,8 @@ function parse(input)
    type = token.type,
    label = type_to_text(type),
    isn = (type == type_newline), 
-   text = isn ? "" : window(token.index, token.length)
-  print(label, "->", text)
+   text = isn ? "\\n" : window(token.index, token.length)
+  print(label, "...", text)
  } 
 }
 
