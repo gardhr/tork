@@ -79,7 +79,6 @@
   type_real = slot++,
   type_scientific = slot++,
   type_discardable = slot++,
-
   type_do = slot++,
   type_while = slot++,
   type_for = slot++,
@@ -96,12 +95,16 @@
 
  function type_to_text(type)
  {
+  function wrong(value)
+  {
+   return "UNDEFINED_TOKEN(" + value + ")"
+  }
   if(!type_to_text.tab)
   {
    var
     tab = []
    for(var idx = 0; idx < 256; ++idx)
-    tab[idx] = "UNDEFINED_TOKEN"
+    tab[idx] = wrong(idx)
    tab[type_identifier] = "identifier"
    tab[type_integer] = "integer"
    tab[type_octal] = "octal"
@@ -178,7 +181,7 @@
    type_to_text.tab = tab  
   }
   if(type >= 256)
-   type = type_undefined
+   return wrong(type)
   return type_to_text.tab[type]
  }
 
