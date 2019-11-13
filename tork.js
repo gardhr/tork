@@ -530,8 +530,8 @@
 /*
  Simple binary search
 */
-    var low = 0, hi = keywords.length
-    while(low < hi)
+    var low = 0, hi = keywords.length - 1
+    while(low <= hi)
     {
      var pvt = floor((hi + low) / 2),
       key = keywords[pvt],
@@ -704,3 +704,4 @@ contain(function(){
   process(arg)
  }
 })
+if(0){}
