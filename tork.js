@@ -7,16 +7,11 @@
   return text.charCodeAt(0)
  }
 
-/*
- Globals
-*/
-
  var
   magic = 6,
   glyphs = [], 
   slot = 128,
   type_undefined = slot++,
-  type_end_of_input = slot++,
   type_unexpected_end_of_input = slot++, 
   type_identifier = slot++,
   type_comment = slot++,
@@ -84,6 +79,19 @@
   type_real = slot++,
   type_scientific = slot++,
   type_discardable = slot++,
+
+  type_do = slot++,
+  type_while = slot++,
+  type_for = slot++,
+  type_until = slot++,
+  type_if = slot++,
+  type_unless = slot++,
+  type_else = slot++,
+  type_break = slot++,
+  type_continue = slot++,
+  type_throw = slot++,
+  type_return = slot++,
+  type_end = slot++,
   type_placeholder
 
  function type_to_text(type)
@@ -92,10 +100,8 @@
   {
    var
     tab = []
-   loop(256, function(idx)
-   {
+   for(var idx = 0; idx < 256; ++idx)
     tab[idx] = "UNDEFINED_TOKEN"
-   })
    tab[type_identifier] = "identifier"
    tab[type_integer] = "integer"
    tab[type_octal] = "octal"
@@ -158,19 +164,32 @@
    tab[type_space] = "spaces"
    tab[type_tab] = "tabs"   
    tab[type_newline] = "newlines"
+   tab[type_do] = "do"
+   tab[type_while] = "while"
+   tab[type_until] = "until"
+   tab[type_for] = "for"
+   tab[type_if] = "if"
+   tab[type_unless] = "unless"
+   tab[type_else] = "else"
+   tab[type_break] = "break"
+   tab[type_continue] = "continue"
+   tab[type_throw] = "throw"
+   tab[type_return] = "return" 
    type_to_text.tab = tab  
   }
+  if(type >= 256)
+   type = type_undefined
   return type_to_text.tab[type]
  }
+
+/*
+ Tokenization
+*/
  
  function match_token(type, index)
  {
   return { type: type, index: index }
- } 
-
-/*
- Token scanners
-*/
+ }
 
  function eof(idx)
  {
@@ -373,8 +392,7 @@
  }
 
 /*
- NOTE: newlines will not be coalesced if 
- type_linefeed's are present in the source
+ NOTE: newlines may not be coelesced on some platforms
 */
  
  function match_newlines(idx)
@@ -436,12 +454,11 @@
   return match_token(type_hex, idx)
  }
 
- function token(pos, idx, lim)
+ function window(pos, len)
  {
   var res = ""
-  var len = idx - pos
-  var rnc = len > lim ? lim : len
-  for(var rdx = pos, rmx = pos + rnc; rdx < rmx; ++rdx)
+  var rmx = pos + len
+  for(var rdx = pos; rdx < rmx; ++rdx)
    res += String.fromCharCode(glyphs[rdx])   
   return res
  }
@@ -461,7 +478,7 @@
 
  function match_identifier(idx)
  {
-  var pos = idx
+  var start = idx
   var uds = char("_")
   while(true)
   {
@@ -469,14 +486,78 @@
    if(!isdigit(ch) && !isalpha(ch) && uds != ch) 
     break
   }
-  var res = token(pos, idx, 6)
-
-
-
-  print(res, signature(res))
-
-
-
+  var keywords = match_identifier.keywords
+  function keyword(tag, type)
+  {
+   var length = tag.length
+   if(length > keywords.longest)
+    keywords.longest = length
+   keywords.push({ 
+    tag : tag,
+    hash: signature(tag), 
+    type: type,
+    length: length 
+   })    
+  }
+  if(keywords == null)
+  {
+   keywords = match_identifier.keywords = []
+   keywords.longest = 0 
+   keyword("do", type_do)
+   keyword("while", type_while)
+   keyword("until", type_until)
+   keyword("for", type_for)
+   keyword("if", type_if)
+   keyword("unless", type_unless)
+   keyword("else", type_else)
+   keyword("break", type_break)
+   keyword("continue", type_continue)
+   keyword("throw", type_throw)
+   keyword("return", type_return)
+   var comparison = function(left, right)
+   { 
+    return left.hash - right.hash 
+   }
+   keywords.sort(comparison) 
+   keywords.lookup = function(traits)
+   {
+    var low = 0, 
+     hi = keywords.length,
+     tag = traits.tag, 
+     hash = traits.hash, 
+     length = traits.length
+/*
+ Simple binary search
+*/
+    while(low < hi)
+    {
+     var pvt = floor((hi + low) / 2),
+      key = keywords[pvt],
+      dif = key.hash - hash
+     if(dif < 0)
+      low = pvt + 1
+     else if(dif > 0)
+      hi = pvt - 1       
+     else
+     {
+      if(length != key.length || tag != key.tag)
+       return null
+      return key     
+     }
+    }
+    return null
+   }
+  }
+  var length = idx - start,
+   longest = keywords.longest
+  if(length > longest) 
+   return match_token(type_identifier, idx)
+  var tag = window(start, length),
+   hash = signature(tag), 
+   traits = { tag: tag, hash: hash, length: length }
+  var found = keywords.lookup(traits)
+  if(found)
+   return match_token(found.type, idx)
   return match_token(type_identifier, idx)
  }
 
@@ -494,10 +575,6 @@
  {
   return match_token(type_discardable, idx + 1)
  }
-
-/*
- TODO
-*/
 
  function match_specials(idx)
  {
@@ -574,7 +651,7 @@
  }
 
 /*
- TODO
+ ...WIP...
 */
 
 function parse(input)
@@ -587,17 +664,9 @@ function parse(input)
  {
   var token = tokens[tdx],
    type = token.type,
-   text = array_to_text(tokens.glyphs.slice
-   (
-    token.index, 
-    token.index + token.length 
-   ))
-  if(false)print
-  (
-   type_to_text(type), type == type_newline ? 
-   "" : text
-  )
-//)//, "(", token.index, token.length, ") :", text)
+   isn = (type == type_newline), 
+   text = isn ? "" : window(token.index, token.length)
+  print(type_to_text(type), text)
  } 
 }
 
@@ -617,12 +686,11 @@ function process(file)
 contain(function(){
  var  args = script_arguments()
  if(args.length == 0)
-  print("TORK:", script_path(), "[files...]")
+  return print("TORK:", script_path(), "[files...]")
  for(var idx in args)
  {
   var arg = args[idx]
   print(arg)
   process(arg)
- } 
+ }
 })
-    
