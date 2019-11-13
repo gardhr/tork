@@ -550,6 +550,10 @@
     return null
    }
   }
+/*
+ Skip sequences longer than a keyword, 
+ otherwise do a quick binary search... 
+*/
   var length = idx - start,
    longest = keywords.longest
   if(length > longest) 
