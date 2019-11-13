@@ -466,6 +466,19 @@
   return res
  }
 
+ function signature(text)
+ { 
+  var sig = 0, len = text.length
+  if(len > magic)
+   len = magic
+  for(var tdx = 0; tdx < len; ++tdx)   
+  {
+   sig <<= 8
+   sig += text.charCodeAt(tdx)
+  }
+  return sig
+ }
+
  function match_identifier(idx)
  {
   var start = idx
@@ -477,34 +490,22 @@
     break
   }
   var keywords = match_identifier.keywords
+  function keyword(tag, type)
+  {
+   var length = tag.length
+   if(length > keywords.longest)
+    keywords.longest = length
+   keywords.push({ 
+    tag : tag,
+    hash: signature(tag), 
+    type: type,
+    length: length 
+   })    
+  }
   if(keywords == null)
   {
    keywords = match_identifier.keywords = []
    keywords.longest = 0 
-   var signature = keywords.signature = function(text)
-   {
-    var sig = 0, len = text.length
-    if(len > magic)
-     len = magic
-    for(var tdx = 0; tdx < len; ++tdx)
-    {
-     sig <<= 8
-     sig += text.charCodeAt(tdx)
-    }
-    return sig
-   }
-   var keyword = keywords.keyword = function(tag, type)
-   {
-    var length = tag.length
-    if(length > keywords.longest)
-     keywords.longest = length
-    keywords.push({ 
-     tag : tag,
-     hash: signature(tag), 
-     type: type,
-     length: length 
-    })    
-   }
    keyword("do", type_do)
    keyword("while", type_while)
    keyword("until", type_until)
