@@ -524,14 +524,13 @@
    keywords.sort(comparison) 
    keywords.lookup = function(traits)
    {
-    var low = 0, 
-     hi = keywords.length,
-     tag = traits.tag, 
+    var tag = traits.tag, 
      hash = traits.hash, 
      length = traits.length
 /*
  Simple binary search
 */
+    var low = 0, hi = keywords.length
     while(low < hi)
     {
      var pvt = floor((hi + low) / 2),
