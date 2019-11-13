@@ -582,6 +582,9 @@
   return match_token(type_discardable, idx + 1)
  }
 
+/*
+ TODO: handle utf-8 
+*/
  function match_specials(idx)
  {
   return match_undefined(idx)
@@ -670,9 +673,10 @@ function parse(input)
  {
   var token = tokens[tdx],
    type = token.type,
+   label = type_to_text(type),
    isn = (type == type_newline), 
    text = isn ? "" : window(token.index, token.length)
-  print(type_to_text(type), text)
+  print(label, "->", text)
  } 
 }
 
