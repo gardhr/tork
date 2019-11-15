@@ -446,22 +446,20 @@
 
  function match_number(idx)
  { 
-//return match_integer(idx)
-var save = idx
   var ise = false, sgn = glyphs[idx]
   if(sgn == type_minus || sgn == type_plus)
    ++idx
-  var scn = match_integer(idx)
-  if(scn)
-   idx = scn.index
-  var dotted = glyphs[idx] == type_dot
+  var esc, rsc, isc = match_integer(idx)
+  if(isc)
+   idx = isc.index
+  var dotted = (glyphs[idx] == type_dot)
   if(dotted)
   {
-   scn = match_integer(++idx)
-   if(scn)
-    idx = scn.index
+   rsc = match_integer(++idx)
+   if(rsc)
+    idx = rsc.index
   }
-  if(!scn)
+  if(!isc && !rsc)
    return null
   ise = (tolower(glyphs[idx]) == char("e"))
   if(ise)
@@ -469,10 +467,10 @@ var save = idx
    sgn = glyphs[++idx]
    if(sgn == type_minus || sgn == type_plus)
     ++idx
-   scn = match_integer(idx)
-   if(!scn)
+   esc = match_integer(idx)
+   if(!esc)
     return null
-   idx = scn.index
+   idx = esc.index
   }
   return match_token(type_number, idx)
  }
@@ -760,3 +758,8 @@ if(exception)
  print(exception)
  print(exception.stackTrace)
 }
+var p = 2.78e-309
+p = -2.78e-309
+p = 2.78e+309
+p = .78e-309
+p = 2.e-309
