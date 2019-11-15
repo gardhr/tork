@@ -544,6 +544,35 @@
   })    
  }
 
+ function lookup(traits)
+ {
+  var keywords = this
+  var tag = traits.tag, 
+  hash = traits.hash, 
+  length = traits.length
+/*
+ Simple binary search
+*/
+  var low = 0, hi = keywords.length - 1
+  while(low <= hi)
+  {
+   var pvt = floor((hi + low) / 2),
+    key = keywords[pvt],
+    dif = key.hash - hash
+   if(dif < 0)
+    low = pvt + 1
+   else if(dif > 0)
+    hi = pvt - 1       
+   else
+   {
+    if(length != key.length || tag != key.tag)
+     return null
+    return key     
+   }
+  }
+  return null
+ }
+  
  function match_identifier(idx)
  {
   var start = idx
@@ -559,6 +588,7 @@
   {
    keywords = match_identifier.keywords = []
    keywords.longest = 0 
+   keywords.lookup = lookup
    keywords.define = define
    keywords.define("do", type_do)
    keywords.define("while", type_while)
@@ -578,33 +608,6 @@
     return left.hash - right.hash 
    }
    keywords.sort(comparison) 
-   keywords.lookup = function(traits)
-   {
-    var tag = traits.tag, 
-     hash = traits.hash, 
-     length = traits.length
-/*
- Simple binary search
-*/
-    var low = 0, hi = keywords.length - 1
-    while(low <= hi)
-    {
-     var pvt = floor((hi + low) / 2),
-      key = keywords[pvt],
-      dif = key.hash - hash
-     if(dif < 0)
-      low = pvt + 1
-     else if(dif > 0)
-      hi = pvt - 1       
-     else
-     {
-      if(length != key.length || tag != key.tag)
-       return null
-      return key     
-     }
-    }
-    return null
-   }
   }
 /*
  Skip sequences longer than a keyword, 
