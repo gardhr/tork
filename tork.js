@@ -755,4 +755,3 @@ contain(function(){
   process(arg)
  }
 })
-var end = 0
