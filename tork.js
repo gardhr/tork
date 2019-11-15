@@ -180,6 +180,7 @@
    tab[type_throw] = "throw"
    tab[type_catch] = "catch"
    tab[type_return] = "return" 
+   tab[type_end] = "end" 
    type_to_text.tab = tab  
   }
   if(type >= 256)
@@ -564,6 +565,7 @@
    keyword("throw", type_throw)
    keyword("catch", type_catch)
    keyword("return", type_return)
+   keyword("end", type_end)
    var comparison = function(left, right)
    { 
     return left.hash - right.hash 
@@ -742,7 +744,7 @@ function process(file)
  var code = parse(tokens)
 }
 
-var exception = caught(function(){
+contain(function(){
  var  args = script_arguments()
  if(args.length == 0)
   return print("TORK:", script_path(), "[files...]")
@@ -753,5 +755,4 @@ var exception = caught(function(){
   process(arg)
  }
 })
-if(exception)
- print("Error:", exception)
+var end = 0
