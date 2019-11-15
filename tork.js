@@ -513,6 +513,11 @@
   return res
  }
 
+/*
+ Functions `signature` and `define` pulled 
+ out of match_identifier for efficiency
+*/
+
  function signature(text)
  { 
   var sig = 0, len = text.length
@@ -526,6 +531,19 @@
   return sig
  }
 
+ function define(tag, type)
+ {
+  var length = tag.length
+  if(length > this.longest)
+   this.longest = length
+  this.push({ 
+   tag : tag,
+   hash: signature(tag),
+   type: type,
+   length: length 
+  })    
+ }
+
  function match_identifier(idx)
  {
   var start = idx
@@ -537,35 +555,24 @@
     break
   }
   var keywords = match_identifier.keywords
-  function keyword(tag, type)
-  {
-   var length = tag.length
-   if(length > keywords.longest)
-    keywords.longest = length
-   keywords.push({ 
-    tag : tag,
-    hash: signature(tag), 
-    type: type,
-    length: length 
-   })    
-  }
   if(keywords == null)
   {
    keywords = match_identifier.keywords = []
    keywords.longest = 0 
-   keyword("do", type_do)
-   keyword("while", type_while)
-   keyword("until", type_until)
-   keyword("for", type_for)
-   keyword("if", type_if)
-   keyword("unless", type_unless)
-   keyword("else", type_else)
-   keyword("break", type_break)
-   keyword("continue", type_continue)
-   keyword("throw", type_throw)
-   keyword("catch", type_catch)
-   keyword("return", type_return)
-   keyword("end", type_end)
+   keywords.define = define
+   keywords.define("do", type_do)
+   keywords.define("while", type_while)
+   keywords.define("until", type_until)
+   keywords.define("for", type_for)
+   keywords.define("if", type_if)
+   keywords.define("unless", type_unless)
+   keywords.define("else", type_else)
+   keywords.define("break", type_break)
+   keywords.define("continue", type_continue)
+   keywords.define("throw", type_throw)
+   keywords.define("catch", type_catch)
+   keywords.define("return", type_return)
+   keywords.define("end", type_end)
    var comparison = function(left, right)
    { 
     return left.hash - right.hash 
