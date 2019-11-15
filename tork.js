@@ -754,12 +754,4 @@ var exception = caught(function(){
  }
 })
 if(exception)
-{
- print(exception)
- print(exception.stackTrace)
-}
-var p = 2.78e-309
-p = -2.78e-309
-p = 2.78e+309
-p = .78e-309
-p = 2.e-309
+ print("Error:", exception)
