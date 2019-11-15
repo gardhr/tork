@@ -73,10 +73,10 @@
   type_linefeed = 0xa, // FIXME 
   type_carriage_return = 0xd, // FIXME
   type_newline = type_linefeed,
-  type_octal = slot++,
+  type_number = slot++,
   type_integer = slot++,
   type_hex = slot++,
-  type_real = slot++,
+  type_octal = slot++,
   type_scientific = slot++,
   type_discardable = slot++,
   type_do = slot++,
@@ -89,6 +89,7 @@
   type_break = slot++,
   type_continue = slot++,
   type_throw = slot++,
+  type_catch = slot++,
   type_return = slot++,
   type_end = slot++,
   type_placeholder
@@ -109,7 +110,7 @@
    tab[type_integer] = "integer"
    tab[type_octal] = "octal"
    tab[type_hex] = "hex"
-   tab[type_real] = "real"
+   tab[type_number] = "number"
    tab[type_scientific] = "scientific"
    tab[type_comment] = "comment"
    tab[type_quote] = "quote"
@@ -177,6 +178,7 @@
    tab[type_break] = "break"
    tab[type_continue] = "continue"
    tab[type_throw] = "throw"
+   tab[type_catch] = "catch"
    tab[type_return] = "return" 
    type_to_text.tab = tab  
   }
@@ -330,6 +332,9 @@
 
  function match_minus(idx)
  {
+  var number = match_number(idx)
+  if(number)
+   return number
   var
    glyph = glyphs[++idx]
   if(glyph == type_equals)
@@ -341,6 +346,9 @@
 
  function match_plus(idx)
  {
+  var number = match_number(idx)
+  if(number)
+   return number
   var
    glyph = glyphs[++idx]
   if(glyph == type_equals)
@@ -384,6 +392,9 @@
 
  function match_dot(idx)
  {
+  var number = match_number(idx)
+  if(number)
+   return number  
   var
    glyph = glyphs[++idx]
   if(
@@ -391,6 +402,8 @@
    glyphs[idx + 1] == type_dot
   )
    return match_token(type_ellipsis, idx + 2)
+  if(isdigit(glyph))
+   return match_number(idx - 1)
   return match_token(type_dot, idx)    
  }
 
@@ -424,9 +437,44 @@
 
  function match_integer(idx)
  {
+  if(!isdigit(glyphs[idx]))
+   return null
   while(isdigit(glyphs[++idx]))
    continue
   return match_token(type_integer, idx)
+ }
+
+ function match_number(idx)
+ { 
+//return match_integer(idx)
+var save = idx
+  var ise = false, sgn = glyphs[idx]
+  if(sgn == type_minus || sgn == type_plus)
+   ++idx
+  var scn = match_integer(idx)
+  if(scn)
+   idx = scn.index
+  var dotted = glyphs[idx] == type_dot
+  if(dotted)
+  {
+   scn = match_integer(++idx)
+   if(scn)
+    idx = scn.index
+  }
+  if(!scn)
+   return null
+  ise = (tolower(glyphs[idx]) == char("e"))
+  if(ise)
+  {
+   sgn = glyphs[++idx]
+   if(sgn == type_minus || sgn == type_plus)
+    ++idx
+   scn = match_integer(idx)
+   if(!scn)
+    return null
+   idx = scn.index
+  }
+  return match_token(type_number, idx)
  }
 
  function match_digit_zero(idx)
@@ -442,8 +490,8 @@
     continue
    return match_token(type_octal, idx)
   }
-  else if(toupper(next) != type_X)
-   return match_integer(idx - 1)
+  if(toupper(next) != type_X)
+   return match_number(idx - 1)
   var
    start = idx
   for(;;)
@@ -453,11 +501,11 @@
     break
   }
   if(idx == start)
-   return 0  
+   return match_undefined(idx)  
   return match_token(type_hex, idx)
  }
 
- function window(pos, len)
+ function token_at(pos, len)
  {
   var res = ""
   var rmx = pos + len
@@ -486,7 +534,7 @@
   while(true)
   {
    var ch = glyphs[++idx]
-   if(!isdigit(ch) && !isalpha(ch) && uds != ch) 
+   if(!isdigit(ch) && !isalpha(ch) && ch != uds) 
     break
   }
   var keywords = match_identifier.keywords
@@ -516,6 +564,7 @@
    keyword("break", type_break)
    keyword("continue", type_continue)
    keyword("throw", type_throw)
+   keyword("catch", type_catch)
    keyword("return", type_return)
    var comparison = function(left, right)
    { 
@@ -558,7 +607,7 @@
    longest = keywords.longest
   if(length > longest) 
    return match_token(type_identifier, idx)
-  var tag = window(start, length),
+  var tag = token_at(start, length),
    hash = signature(tag), 
    traits = { tag: tag, hash: hash, length: length }
   var found = keywords.lookup(traits)
@@ -628,7 +677,7 @@
  var type_digit_zero = char("0")
   tokenizers[type_digit_zero] = match_digit_zero
  for(var idx = type_digit_zero + 1, imx = idx + 10; idx < imx; ++idx)
-  tokenizers[idx] = match_integer
+  tokenizers[idx] = match_number
  tokenizers[char("_")] = match_identifier
  for(var idx = char("a"), imx = idx + 26; idx < imx; ++idx)
   tokenizers[idx] = match_identifier
@@ -646,6 +695,8 @@
    var scan = (glyph >= 256) ? 
     match_specials : tokenizers[glyph]
    var result = scan(current)
+   if(!result)
+    result = match_undefined(current)
    var type = result.type 
    var length = result.index - current
    if(type != type_discardable)
@@ -675,7 +726,7 @@ function parse(input)
    type = token.type,
    label = type_to_text(type),
    isn = (type == type_newline), 
-   text = isn ? "\\n" : window(token.index, token.length)
+   text = isn ? "\\n" : token_at(token.index, token.length)
   print(label, "...", text)
  } 
 }
@@ -693,7 +744,7 @@ function process(file)
  var code = parse(tokens)
 }
 
-contain(function(){
+var exception = caught(function(){
  var  args = script_arguments()
  if(args.length == 0)
   return print("TORK:", script_path(), "[files...]")
@@ -704,4 +755,8 @@ contain(function(){
   process(arg)
  }
 })
-if(0){}
+if(exception)
+{
+ print(exception)
+ print(exception.stackTrace)
+}
