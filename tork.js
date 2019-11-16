@@ -684,14 +684,13 @@
  tokenizers[type_space] = match_spaces
  tokenizers[type_single_quote] = match_single_quote
  tokenizers[type_double_quote] = match_double_quote
- var type_digit_zero = char("0")
-  tokenizers[type_digit_zero] = match_digit_zero
- for(var idx = type_digit_zero + 1, imx = idx + 10; idx < imx; ++idx)
+ tokenizers[char("0")] = match_digit_zero
+ for(var idx = char("1"), imx = char("9"); idx <= imx; ++idx)
   tokenizers[idx] = match_number
  tokenizers[char("_")] = match_identifier
- for(var idx = char("a"), imx = idx + 26; idx < imx; ++idx)
+ for(var idx = char("a"), imx = char("z"); idx <= imx; ++idx)
   tokenizers[idx] = match_identifier
- for(var idx = char("A"), imx = idx + 26; idx < imx; ++idx)
+ for(var idx = char("A"), imx = char("Z"); idx <= imx; ++idx)
   tokenizers[idx] = match_identifier
 
  function tokenize(text)
@@ -706,7 +705,11 @@
     match_specials : tokenizers[glyph]
    var result = scan(current)
    if(!result)
+   {
     result = match_undefined(current)
+    print("index:", type_to_text(glyph)) 
+    exit()
+   }
    var type = result.type 
    var length = result.index - current
    if(type != type_discardable)
