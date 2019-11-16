@@ -658,6 +658,7 @@
  tokenizers[type_modulus] = match_modulus
  tokenizers[type_caret] = match_caret
  tokenizers[type_and] = match_and
+ tokenizers[type_or] = match_or
  tokenizers[type_times] = match_times
  tokenizers[type_minus] = match_minus
  tokenizers[type_plus] = match_plus
