@@ -486,6 +486,9 @@
    type_A = char("A"),
    type_F = char("F"),
    next = glyphs[++idx]
+/*
+ TODO: handle octal characters
+*/
   if(isdigit(next))
   {
    while(isdigit(glyphs[++idx]))
@@ -809,6 +812,3 @@ contain(function(){
   process(arg)
  }
 })
-var a = +21
-a = -2.56
-a = +256.9e2
