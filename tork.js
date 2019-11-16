@@ -715,7 +715,7 @@
   }
   free(bytes)
   if(bdx != text.length)
-   throw new Error("UTF-8 no yet supported")
+   throw new Error("UTF-8 not yet supported")
   return res
  } 
 
@@ -745,6 +745,14 @@
   return tokens
  }
 
+
+function stopwatch(action)
+{
+ var start = clock()
+ action()
+ return (clock() - start) / CLOCKS_PER_SEC
+}
+
 /*
  ...WIP...
 */
@@ -760,23 +768,34 @@ function parse(input)
  Test
 */
 
+function truncate(value, significant)
+{
+ var scale = pow(10, significant||3)
+ return floor(value * scale) / scale
+}
+
+function tick()
+{
+ return clock() / CLOCKS_PER_SEC
+}
+
 function process(file)
 {
  var text = file_to_text(file)
  if(text == null)
   return print("Error: cannot open file '", file, "'")
- var start = clock()
- var tokens = tokenize(text)
- var elapsed = (clock() - start) / CLOCKS_PER_SEC
- var tokens = parse(tokens)
+ var start = tick(),
+  tokens = tokenize(text), 
+  elapsed = truncate(tick() - start)
+ var code = parse(tokens)
  for(var tdx = 0, len = tokens.length; tdx < len; ++tdx)
  {
   var token = tokens[tdx],
    type = token.type,
    label = type_to_text(type),
    isn = (type == type_newline), 
-   text = isn ? "\\n" : token_at(token.index, token.length)
-  print(label, "...", text)
+   literal = isn ? "\\n" : token_at(token.index, token.length)
+  print(label, "...", literal)
  } 
  print
  (
