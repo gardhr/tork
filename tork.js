@@ -74,11 +74,11 @@
   type_linefeed = 0xa, // FIXME 
   type_carriage_return = 0xd, // FIXME
   type_newline = type_linefeed,
-  type_number = slot++,
+  type_real = slot++, 
+  type_scientific = slot++,
   type_integer = slot++,
   type_hex = slot++,
   type_octal = slot++,
-  type_scientific = slot++,
   type_discardable = slot++,
   type_do = slot++,
   type_while = slot++,
@@ -111,7 +111,7 @@
    tab[type_integer] = "integer"
    tab[type_octal] = "octal"
    tab[type_hex] = "hex"
-   tab[type_number] = "number"
+   tab[type_real] = "real"
    tab[type_scientific] = "scientific"
    tab[type_comment] = "comment"
    tab[type_quote] = "quote"
@@ -448,33 +448,35 @@
 
  function match_number(idx)
  { 
-  var ise = false, sgn = glyphs[idx]
+  var sgn = glyphs[idx]
   if(sgn == type_minus || sgn == type_plus)
    ++idx
-  var esc, rsc, isc = match_integer(idx)
-  if(isc)
-   idx = isc.index
+  var real, integer = match_integer(idx)
+  if(integer)
+   idx = integer.index
   var dotted = (glyphs[idx] == type_dot)
   if(dotted)
   {
-   rsc = match_integer(++idx)
-   if(rsc)
-    idx = rsc.index
+   real = match_integer(++idx)
+   if(real)
+    idx = real.index
   }
-  if(!isc && !rsc)
+  if(!integer && !real)
    return null
-  ise = (tolower(glyphs[idx]) == char("e"))
-  if(ise)
+  var scientific = (tolower(glyphs[idx]) == char("e"))
+  if(scientific)
   {
    sgn = glyphs[++idx]
    if(sgn == type_minus || sgn == type_plus)
     ++idx
-   esc = match_integer(idx)
-   if(!esc)
+   var exponent = match_integer(idx)
+   if(!exponent)
     return null
-   idx = esc.index
+   return match_token(type_scientific, exponent.index)
   }
-  return match_token(type_number, idx)
+  if(dotted)
+   return match_token(type_real, idx)
+  return match_token(type_integer, idx)
  }
 
  function match_digit_zero(idx)
@@ -807,3 +809,6 @@ contain(function(){
   process(arg)
  }
 })
+var a = +21
+a = -2.56
+a = +256.9e2
