@@ -762,7 +762,7 @@ function parse(input)
 
 function truncate(value, significant)
 {
- var scale = pow(10, significant||3)
+ var scale = pow(10, significant||4)
  return floor(value * scale) / scale
 }
 
