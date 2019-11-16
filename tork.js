@@ -705,11 +705,7 @@
     match_specials : tokenizers[glyph]
    var result = scan(current)
    if(!result)
-   {
     result = match_undefined(current)
-    print("index:", type_to_text(glyph)) 
-    exit()
-   }
    var type = result.type 
    var length = result.index - current
    if(type != type_discardable)
