@@ -41,6 +41,7 @@
   type_plus_plus = slot++,
   type_plus_assign = slot++,
   type_minus = char("-"),
+  type_minus_minus = slot++,
   type_minus_assign = slot++,
   type_times = type_asterisk,
   type_times_assign = slot++,
@@ -694,6 +695,30 @@
  for(var idx = char("A"), imx = char("Z"); idx <= imx; ++idx)
   tokenizers[idx] = match_identifier
 
+/*
+ WORKAROUND: cosi's text_to_array is too slow
+ ...use non-utf-8 shim until that gets fixed 
+*/
+
+ function text_to_array(text)
+ {
+  var byte, bdx = 0, 
+   len = text.length, 
+   res = new Array(len),
+   bytes = text_to_bytes(text)
+  while(true)
+  { 
+   byte = get_byte(bytes, bdx)
+   if(byte == 0)
+    break
+   res[bdx++] = byte
+  }
+  free(bytes)
+  if(bdx != text.length)
+   throw new Error("UTF-8 no yet supported")
+  return res
+ } 
+
  function tokenize(text)
  {
   var tokens = [], current = 0
@@ -750,8 +775,15 @@ function process(file)
  var text = file_to_text(file)
  if(text == null)
   return print("Error: cannot open file '", file, "'")
+ var start = clock()
  var tokens = tokenize(text)
- var code = parse(tokens)
+ var elapsed = (clock() - start) / CLOCKS_PER_SEC
+ parse(tokens)
+ print
+ (
+  "-", text.length, "glyphs processed in", 
+  elapsed, "seconds -"
+ )
 }
 
 contain(function(){
