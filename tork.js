@@ -745,14 +745,6 @@
   return tokens
  }
 
-
-function stopwatch(action)
-{
- var start = clock()
- action()
- return (clock() - start) / CLOCKS_PER_SEC
-}
-
 /*
  ...WIP...
 */
