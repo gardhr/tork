@@ -754,16 +754,6 @@ function parse(input)
  if(input instanceof String)
   return parse(tokenize(input))
  print("Parser")
- var tokens = input
- for(var tdx = 0, len = tokens.length; tdx < len; ++tdx)
- {
-  var token = tokens[tdx],
-   type = token.type,
-   label = type_to_text(type),
-   isn = (type == type_newline), 
-   text = isn ? "\\n" : token_at(token.index, token.length)
-  print(label, "...", text)
- } 
 }
 
 /*
@@ -778,7 +768,16 @@ function process(file)
  var start = clock()
  var tokens = tokenize(text)
  var elapsed = (clock() - start) / CLOCKS_PER_SEC
- parse(tokens)
+ var tokens = parse(tokens)
+ for(var tdx = 0, len = tokens.length; tdx < len; ++tdx)
+ {
+  var token = tokens[tdx],
+   type = token.type,
+   label = type_to_text(type),
+   isn = (type == type_newline), 
+   text = isn ? "\\n" : token_at(token.index, token.length)
+  print(label, "...", text)
+ } 
  print
  (
   "-", text.length, "glyphs processed in", 
