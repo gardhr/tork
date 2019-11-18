@@ -399,13 +399,12 @@
    return number  
   var
    glyph = glyphs[++idx]
-  if(
+  if
+  (
    glyph == type_dot && 
    glyphs[idx + 1] == type_dot
   )
    return match_token(type_ellipsis, idx + 2)
-  if(isdigit(glyph))
-   return match_number(idx - 1)
   return match_token(type_dot, idx)    
  }
 
@@ -812,3 +811,4 @@ contain(function(){
   process(arg)
  }
 })
+
