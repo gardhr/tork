@@ -782,7 +782,7 @@ function process(file)
    label = type_to_text(type),
    isn = (type == type_newline), 
    literal = token_at(token.index, token.length)
-  print(label, isn ? "" : "`" + literal + "`")
+  print(label, isn ? "[...]" : "`" + literal + "`")
  } 
  print
  (
