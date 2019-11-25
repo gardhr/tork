@@ -552,7 +552,7 @@
   var low = 0, hi = keywords.length - 1
   while(low <= hi)
   {
-   var pvt = floor((hi + low) / 2),
+   var pvt = ((hi + low) >> 1),
     key = keywords[pvt],
     dif = key.hash - hash
    if(dif < 0)
