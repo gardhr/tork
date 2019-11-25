@@ -334,9 +334,6 @@
 
  function match_minus(idx)
  {
-  var number = match_number(idx)
-  if(number)
-   return number
   var
    glyph = glyphs[++idx]
   if(glyph == type_equals)
@@ -348,9 +345,6 @@
 
  function match_plus(idx)
  {
-  var number = match_number(idx)
-  if(number)
-   return number
   var
    glyph = glyphs[++idx]
   if(glyph == type_equals)
@@ -394,9 +388,6 @@
 
  function match_dot(idx)
  {
-  var number = match_number(idx)
-  if(number)
-   return number  
   var
    glyph = glyphs[++idx]
   if
