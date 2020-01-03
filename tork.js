@@ -487,7 +487,7 @@
   for(;;)
   {
    next = toupper(glyphs[++idx])
-   if(!isdigit(next) || next < A || next > F)
+   if(!isdigit(next) && (next < A || next > F))
     break
   }
   if(idx == start)

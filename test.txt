@@ -48,9 +48,7 @@ comma `,`
 newlines 
 identifier `type_backslash`
 equals `=`
-hex `0x`
-integer `5`
-identifier `c`
+hex `0x5c`
 comma `,`
 comment `// FIXME`
 newlines 
@@ -86,8 +84,7 @@ comma `,`
 newlines 
 identifier `type_double_quote`
 equals `=`
-hex `0x`
-integer `22`
+hex `0x22`
 comma `,`
 comment `// FIXME`
 newlines 
@@ -437,22 +434,19 @@ comma `,`
 newlines 
 identifier `type_tab`
 equals `=`
-hex `0x`
-integer `9`
+hex `0x9`
 comma `,`
 comment `// FIXME`
 newlines 
 identifier `type_linefeed`
 equals `=`
-hex `0x`
-identifier `a`
+hex `0xa`
 comma `,`
 comment `// FIXME `
 newlines 
 identifier `type_carriage_return`
 equals `=`
-hex `0x`
-identifier `d`
+hex `0xd`
 comma `,`
 comment `// FIXME`
 newlines 
@@ -2780,7 +2774,8 @@ identifier `isdigit`
 left_paren `(`
 identifier `next`
 right_paren `)`
-or_logical `||`
+and_logical `&&`
+left_paren `(`
 identifier `next`
 less `<`
 identifier `A`
@@ -2788,6 +2783,7 @@ or_logical `||`
 identifier `next`
 greater `>`
 identifier `F`
+right_paren `)`
 right_paren `)`
 newlines 
 break `break`
@@ -4513,4 +4509,4 @@ newlines
 right_brace `}`
 right_paren `)`
 newlines 
-- 18315 glyphs processed in 0.573 seconds -
+- 18317 glyphs processed in 0.561 seconds -
