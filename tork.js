@@ -535,9 +535,10 @@
   })    
  }
 
- function lookup(tag, hash, length)
+ function lookup(tag)
  {
-  var keywords = this
+  var keywords = this, 
+   hash = signature(tag)
 /*
  Simple binary search
 */
@@ -553,7 +554,7 @@
     hi = pvt - 1       
    else
    {
-    if(length != key.length || tag != key.tag)
+    if(tag.length != key.length || tag != key.tag)
      return null
     return key     
    }
@@ -605,9 +606,7 @@
    longest = keywords.longest
   if(length > longest) 
    return match_token(type_identifier, idx)
-  var tag = token_at(start, length),
-   hash = signature(tag),
-   found = keywords.lookup(tag, hash, length)
+  var found = keywords.lookup(token_at(start, length))
   if(found)
    return match_token(found.type, idx)
   return match_token(type_identifier, idx)
