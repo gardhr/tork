@@ -2,11 +2,6 @@
  Rough proof of concept...
 */
 
- function char(text)
- {
-  return text.charCodeAt(0)
- }
-
  var
   magic = 6,
   glyphs = [], 
@@ -472,9 +467,9 @@
  function match_digit_zero(idx)
  {
   var 
-   type_X = char("X"),
-   type_A = char("A"),
-   type_F = char("F"),
+   X = char("X"),
+   A = char("A"),
+   F = char("F"),
    next = glyphs[++idx]
 /*
  TODO: handle octal characters
@@ -485,14 +480,14 @@
     continue
    return match_token(type_octal, idx)
   }
-  if(toupper(next) != type_X)
+  if(toupper(next) != X)
    return match_number(idx - 1)
   var
    start = idx
   for(;;)
   {
    next = toupper(glyphs[++idx])
-   if(!isdigit(next) || next < type_A || next > type_F)
+   if(!isdigit(next) || next < A || next > F)
     break
   }
   if(idx == start)
@@ -505,7 +500,7 @@
   var res = ""
   var rmx = pos + len
   for(var rdx = pos; rdx < rmx; ++rdx)
-   res += String.fromCharCode(glyphs[rdx])   
+   res += text(glyphs[rdx])   
   return res
  }
 
@@ -522,7 +517,7 @@
   for(var tdx = 0; tdx < len; ++tdx)   
   {
    sig <<= 8
-   sig += text.charCodeAt(tdx)
+   sig += char(text, tdx)
   }
   return sig
  }
@@ -573,7 +568,7 @@
  {
   var start = idx
   var uds = char("_")
-  while(true)
+  for(;;)
   {
    var ch = glyphs[++idx]
    if(!isdigit(ch) && !isalpha(ch) && ch != uds) 
@@ -701,7 +696,7 @@
    len = text.length, 
    res = new Array(len),
    bytes = text_to_bytes(text)
-  while(true)
+  for(;;)
   { 
    byte = get_byte(bytes, bdx)
    if(byte == 0)
@@ -709,8 +704,7 @@
    res[bdx++] = byte
   }
   free(bytes)
-  if(bdx != text.length)
-   throw new Error("UTF-8 not yet supported")
+  verify(bdx == text.length, "UTF-8 not yet supported")
   return res
  } 
 
@@ -757,7 +751,7 @@ function parse(input)
 
 function truncate(value, significant)
 {
- var scale = pow(10, significant||4)
+ var scale = pow(10, significant || 4)
  return floor(value * scale) / scale
 }
 
@@ -782,7 +776,7 @@ function process(file)
    label = type_to_text(type),
    isn = (type == type_newline), 
    literal = token_at(token.index, token.length)
-  print(label, isn ? "[...]" : "`" + literal + "`")
+  print(label, isn ? "" : "`" + literal + "`")
  } 
  print
  (
