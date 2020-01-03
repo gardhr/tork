@@ -535,12 +535,9 @@
   })    
  }
 
- function lookup(traits)
+ function lookup(tag, hash, length)
  {
   var keywords = this
-  var tag = traits.tag, 
-  hash = traits.hash, 
-  length = traits.length
 /*
  Simple binary search
 */
@@ -609,9 +606,8 @@
   if(length > longest) 
    return match_token(type_identifier, idx)
   var tag = token_at(start, length),
-   hash = signature(tag), 
-   traits = { tag: tag, hash: hash, length: length }
-  var found = keywords.lookup(traits)
+   hash = signature(tag),
+   found = keywords.lookup(tag, hash, length)
   if(found)
    return match_token(found.type, idx)
   return match_token(type_identifier, idx)
