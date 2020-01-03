@@ -1,0 +1,4516 @@
+tork.js
+Parser
+comment `/*
+ Rough proof of concept...
+*/`
+newlines 
+identifier `var`
+newlines 
+identifier `magic`
+equals `=`
+integer `6`
+comma `,`
+newlines 
+identifier `glyphs`
+equals `=`
+left_bracket `[`
+right_bracket `]`
+comma `,`
+newlines 
+identifier `slot`
+equals `=`
+integer `128`
+comma `,`
+newlines 
+identifier `type_undefined`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_unexpected_end_of_input`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_identifier`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_comment`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_backslash`
+equals `=`
+hex `0x`
+integer `5`
+identifier `c`
+comma `,`
+comment `// FIXME`
+newlines 
+identifier `type_forward_slash`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"/"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_asterisk`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"*"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_quote`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_single_quote`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"'"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_double_quote`
+equals `=`
+hex `0x`
+integer `22`
+comma `,`
+comment `// FIXME`
+newlines 
+identifier `type_left_brace`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"{"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_right_brace`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"}"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_left_paren`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"("`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_right_paren`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `")"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_left_bracket`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"["`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_right_bracket`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"]"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_not`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"!"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_not_equal`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_caret`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"^"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_caret_assign`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_and`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"&"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_and_assign`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_and_logical`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_or`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"|"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_or_assign`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_or_logical`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_plus`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"+"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_plus_plus`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_plus_assign`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_minus`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"-"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_minus_minus`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_minus_assign`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_times`
+equals `=`
+identifier `type_asterisk`
+comma `,`
+newlines 
+identifier `type_times_assign`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_divide`
+equals `=`
+identifier `type_forward_slash`
+comma `,`
+newlines 
+identifier `type_divide_assign`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_modulus`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"%"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_modulus_assign`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_equals`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"="`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_equals_equals`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_less`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"<"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_less_or_equal`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_shift_left`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_shift_left_assign`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_greater`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `">"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_greater_or_equal`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_shift_right`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_shift_right_assign`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_dollar`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"$"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_colon`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `":"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_semicolon`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `";"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_conditional`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"?"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_dot`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"."`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_ellipsis`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_comma`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `","`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_at`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"@"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_pound`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"#"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_tilde`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"~"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_space`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `" "`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type_tab`
+equals `=`
+hex `0x`
+integer `9`
+comma `,`
+comment `// FIXME`
+newlines 
+identifier `type_linefeed`
+equals `=`
+hex `0x`
+identifier `a`
+comma `,`
+comment `// FIXME `
+newlines 
+identifier `type_carriage_return`
+equals `=`
+hex `0x`
+identifier `d`
+comma `,`
+comment `// FIXME`
+newlines 
+identifier `type_newline`
+equals `=`
+identifier `type_linefeed`
+comma `,`
+newlines 
+identifier `type_real`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_scientific`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_integer`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_hex`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_octal`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_discardable`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_do`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_while`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_for`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_until`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_if`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_unless`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_else`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_break`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_continue`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_throw`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_catch`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_return`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_end`
+equals `=`
+identifier `slot`
+plus_plus `++`
+comma `,`
+newlines 
+identifier `type_placeholder`
+newlines 
+identifier `function`
+identifier `type_to_text`
+left_paren `(`
+identifier `type`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `function`
+identifier `wrong`
+left_paren `(`
+identifier `value`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+return `return`
+quote `"UNDEFINED_TOKEN("`
+plus `+`
+identifier `value`
+plus `+`
+quote `")"`
+newlines 
+right_brace `}`
+newlines 
+if `if`
+left_paren `(`
+not `!`
+identifier `type_to_text`
+dot `.`
+identifier `tab`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+newlines 
+identifier `tab`
+equals `=`
+left_bracket `[`
+right_bracket `]`
+newlines 
+for `for`
+left_paren `(`
+identifier `var`
+identifier `idx`
+equals `=`
+integer `0`
+semicolon `;`
+identifier `idx`
+less `<`
+integer `256`
+semicolon `;`
+plus_plus `++`
+identifier `idx`
+right_paren `)`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `idx`
+right_bracket `]`
+equals `=`
+identifier `wrong`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_identifier`
+right_bracket `]`
+equals `=`
+quote `"identifier"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_integer`
+right_bracket `]`
+equals `=`
+quote `"integer"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_octal`
+right_bracket `]`
+equals `=`
+quote `"octal"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_hex`
+right_bracket `]`
+equals `=`
+quote `"hex"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_real`
+right_bracket `]`
+equals `=`
+quote `"real"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_scientific`
+right_bracket `]`
+equals `=`
+quote `"scientific"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_comment`
+right_bracket `]`
+equals `=`
+quote `"comment"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_quote`
+right_bracket `]`
+equals `=`
+quote `"quote"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_unexpected_end_of_input`
+right_bracket `]`
+equals `=`
+quote `"unexpected_end_of_input"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_backslash`
+right_bracket `]`
+equals `=`
+quote `"backslash"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_single_quote`
+right_bracket `]`
+equals `=`
+quote `"single_quote"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_double_quote`
+right_bracket `]`
+equals `=`
+quote `"double_quote"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_left_brace`
+right_bracket `]`
+equals `=`
+quote `"left_brace"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_right_brace`
+right_bracket `]`
+equals `=`
+quote `"right_brace"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_left_paren`
+right_bracket `]`
+equals `=`
+quote `"left_paren"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_right_paren`
+right_bracket `]`
+equals `=`
+quote `"right_paren"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_left_bracket`
+right_bracket `]`
+equals `=`
+quote `"left_bracket"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_right_bracket`
+right_bracket `]`
+equals `=`
+quote `"right_bracket"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_not`
+right_bracket `]`
+equals `=`
+quote `"not"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_not_equal`
+right_bracket `]`
+equals `=`
+quote `"not_equal"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_caret`
+right_bracket `]`
+equals `=`
+quote `"caret"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_caret_assign`
+right_bracket `]`
+equals `=`
+quote `"caret_assign"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_and`
+right_bracket `]`
+equals `=`
+quote `"and"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_and_assign`
+right_bracket `]`
+equals `=`
+quote `"and_assign"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_and_logical`
+right_bracket `]`
+equals `=`
+quote `"and_logical"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_or`
+right_bracket `]`
+equals `=`
+quote `"or"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_or_assign`
+right_bracket `]`
+equals `=`
+quote `"or_assign"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_or_logical`
+right_bracket `]`
+equals `=`
+quote `"or_logical"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_plus`
+right_bracket `]`
+equals `=`
+quote `"plus"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_plus_plus`
+right_bracket `]`
+equals `=`
+quote `"plus_plus"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_plus_assign`
+right_bracket `]`
+equals `=`
+quote `"plus_assign"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_minus`
+right_bracket `]`
+equals `=`
+quote `"minus"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_minus_assign`
+right_bracket `]`
+equals `=`
+quote `"minus_assign"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_times`
+right_bracket `]`
+equals `=`
+quote `"times"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_times_assign`
+right_bracket `]`
+equals `=`
+quote `"times_assign"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_divide`
+right_bracket `]`
+equals `=`
+quote `"divide"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_divide_assign`
+right_bracket `]`
+equals `=`
+quote `"divide_assign"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_modulus`
+right_bracket `]`
+equals `=`
+quote `"modulus"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_modulus_assign`
+right_bracket `]`
+equals `=`
+quote `"modulus_assign"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_equals_equals`
+right_bracket `]`
+equals `=`
+quote `"equals_equals"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_equals`
+right_bracket `]`
+equals `=`
+quote `"equals"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_less`
+right_bracket `]`
+equals `=`
+quote `"less"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_less_or_equal`
+right_bracket `]`
+equals `=`
+quote `"less_or_equal"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_shift_left`
+right_bracket `]`
+equals `=`
+quote `"shift_left"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_shift_left_assign`
+right_bracket `]`
+equals `=`
+quote `"shift_left_assign"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_greater`
+right_bracket `]`
+equals `=`
+quote `"greater"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_greater_or_equal`
+right_bracket `]`
+equals `=`
+quote `"greater_or_equal"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_shift_right`
+right_bracket `]`
+equals `=`
+quote `"shift_right"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_shift_right_assign`
+right_bracket `]`
+equals `=`
+quote `"shift_right_assign"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_dollar`
+right_bracket `]`
+equals `=`
+quote `"dollar"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_colon`
+right_bracket `]`
+equals `=`
+quote `"colon"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_semicolon`
+right_bracket `]`
+equals `=`
+quote `"semicolon"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_conditional`
+right_bracket `]`
+equals `=`
+quote `"conditional"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_dot`
+right_bracket `]`
+equals `=`
+quote `"dot"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_ellipsis`
+right_bracket `]`
+equals `=`
+quote `"ellipsis"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_comma`
+right_bracket `]`
+equals `=`
+quote `"comma"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_at`
+right_bracket `]`
+equals `=`
+quote `"at"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_pound`
+right_bracket `]`
+equals `=`
+quote `"pound"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_tilde`
+right_bracket `]`
+equals `=`
+quote `"tilde"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_space`
+right_bracket `]`
+equals `=`
+quote `"spaces"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_tab`
+right_bracket `]`
+equals `=`
+quote `"tabs"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_newline`
+right_bracket `]`
+equals `=`
+quote `"newlines"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_do`
+right_bracket `]`
+equals `=`
+quote `"do"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_while`
+right_bracket `]`
+equals `=`
+quote `"while"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_until`
+right_bracket `]`
+equals `=`
+quote `"until"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_for`
+right_bracket `]`
+equals `=`
+quote `"for"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_if`
+right_bracket `]`
+equals `=`
+quote `"if"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_unless`
+right_bracket `]`
+equals `=`
+quote `"unless"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_else`
+right_bracket `]`
+equals `=`
+quote `"else"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_break`
+right_bracket `]`
+equals `=`
+quote `"break"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_continue`
+right_bracket `]`
+equals `=`
+quote `"continue"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_throw`
+right_bracket `]`
+equals `=`
+quote `"throw"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_catch`
+right_bracket `]`
+equals `=`
+quote `"catch"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_return`
+right_bracket `]`
+equals `=`
+quote `"return"`
+newlines 
+identifier `tab`
+left_bracket `[`
+identifier `type_end`
+right_bracket `]`
+equals `=`
+quote `"end"`
+newlines 
+identifier `type_to_text`
+dot `.`
+identifier `tab`
+equals `=`
+identifier `tab`
+newlines 
+right_brace `}`
+newlines 
+if `if`
+left_paren `(`
+identifier `type`
+greater_or_equal `>=`
+integer `256`
+right_paren `)`
+newlines 
+return `return`
+identifier `wrong`
+left_paren `(`
+identifier `type`
+right_paren `)`
+newlines 
+return `return`
+identifier `type_to_text`
+dot `.`
+identifier `tab`
+left_bracket `[`
+identifier `type`
+right_bracket `]`
+newlines 
+right_brace `}`
+newlines 
+comment `/*
+ Tokenization
+*/`
+newlines 
+newlines 
+identifier `function`
+identifier `match_token`
+left_paren `(`
+identifier `type`
+comma `,`
+identifier `index`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+return `return`
+left_brace `{`
+identifier `type`
+colon `:`
+identifier `type`
+comma `,`
+identifier `index`
+colon `:`
+identifier `index`
+right_brace `}`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `eof`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+return `return`
+identifier `idx`
+greater_or_equal `>=`
+identifier `glyphs`
+dot `.`
+identifier `length`
+newlines 
+right_brace `}`
+newlines 
+newlines 
+identifier `function`
+identifier `match_quote`
+left_paren `(`
+identifier `quote`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+for `for`
+left_paren `(`
+semicolon `;`
+semicolon `;`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+if `if`
+left_paren `(`
+identifier `eof`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_unexpected_end_of_input`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+identifier `var`
+identifier `ch`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+newlines 
+if `if`
+left_paren `(`
+identifier `ch`
+equals_equals `==`
+identifier `quote`
+right_paren `)`
+newlines 
+break `break`
+newlines 
+if `if`
+left_paren `(`
+identifier `ch`
+equals_equals `==`
+identifier `type_backslash`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+not `!`
+identifier `eof`
+left_paren `(`
+identifier `idx`
+plus `+`
+integer `2`
+right_paren `)`
+right_paren `)`
+newlines 
+identifier `idx`
+plus_assign `+=`
+integer `2`
+newlines 
+right_brace `}`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_quote`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_single_quote`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+return `return`
+identifier `match_quote`
+left_paren `(`
+identifier `type_single_quote`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_double_quote`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+return `return`
+identifier `match_quote`
+left_paren `(`
+identifier `type_double_quote`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+newlines 
+identifier `function`
+identifier `match_equals`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+equals_equals `==`
+identifier `type_equals`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_equals_equals`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_equals`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_not`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+equals_equals `==`
+identifier `type_equals`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_not_equal`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_not`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_modulus`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+equals_equals `==`
+identifier `type_equals`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_modulus_assign`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_modulus`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_caret`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+equals_equals `==`
+identifier `type_equals`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_caret_assign`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_caret`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_and`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+newlines 
+identifier `glyph`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_and`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_and_logical`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+else `else`
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_equals`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_and_assign`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_and`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_or`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+newlines 
+identifier `glyph`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_or`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_or_logical`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+else `else`
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_equals`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_or_assign`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_or`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_times`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+equals_equals `==`
+identifier `type_equals`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_times_assign`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_times`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_nested_comment`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+if `if`
+left_paren `(`
+newlines 
+identifier `glyphs`
+left_bracket `[`
+identifier `idx`
+plus_plus `++`
+right_bracket `]`
+not_equal `!=`
+identifier `type_forward_slash`
+or_logical `||`
+newlines 
+identifier `glyphs`
+left_bracket `[`
+identifier `idx`
+plus_plus `++`
+right_bracket `]`
+not_equal `!=`
+identifier `type_asterisk`
+newlines 
+right_paren `)`
+newlines 
+return `return`
+integer `0`
+newlines 
+for `for`
+left_paren `(`
+semicolon `;`
+semicolon `;`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `inner`
+equals `=`
+identifier `match_nested_comment`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+identifier `inner`
+not_equal `!=`
+integer `0`
+right_paren `)`
+newlines 
+identifier `idx`
+equals `=`
+identifier `inner`
+newlines 
+if `if`
+left_paren `(`
+identifier `eof`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_unexpected_end_of_input`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+newlines 
+identifier `glyphs`
+left_bracket `[`
+identifier `idx`
+right_bracket `]`
+equals_equals `==`
+identifier `type_asterisk`
+and_logical `&&`
+newlines 
+identifier `glyphs`
+left_bracket `[`
+identifier `idx`
+plus `+`
+integer `1`
+right_bracket `]`
+equals_equals `==`
+identifier `type_forward_slash`
+newlines 
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `idx`
+plus_assign `+=`
+integer `2`
+newlines 
+break `break`
+newlines 
+right_brace `}`
+newlines 
+plus_plus `++`
+identifier `idx`
+newlines 
+right_brace `}`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_comment`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_divide`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+newlines 
+identifier `glyph`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_equals`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_divide_assign`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+else `else`
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_forward_slash`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+while `while`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+not_equal `!=`
+identifier `type_newline`
+right_paren `)`
+newlines 
+continue `continue`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_comment`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+else `else`
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_asterisk`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+return `return`
+identifier `match_nested_comment`
+left_paren `(`
+identifier `idx`
+minus `-`
+integer `1`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_divide`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_minus`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+newlines 
+identifier `glyph`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_equals`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_minus_assign`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+else `else`
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_minus`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_minus_minus`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_minus`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_plus`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+newlines 
+identifier `glyph`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_equals`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_plus_assign`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+else `else`
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_plus`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_plus_plus`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_plus`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_less`
+left_paren `(`
+identifier `idx`
+comma `,`
+identifier `token`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+newlines 
+identifier `glyph`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_equals`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_less_or_equal`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+else `else`
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_less`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `glyph`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+identifier `idx`
+plus `+`
+integer `1`
+right_bracket `]`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_equals`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_shift_left_assign`
+comma `,`
+identifier `idx`
+plus `+`
+integer `2`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_shift_left`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_less`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_greater`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+newlines 
+identifier `glyph`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_equals`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_greater_or_equal`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+else `else`
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_greater`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `glyph`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+identifier `idx`
+plus `+`
+integer `1`
+right_bracket `]`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyph`
+equals_equals `==`
+identifier `type_equals`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_shift_right_assign`
+comma `,`
+identifier `idx`
+plus `+`
+integer `2`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_shift_right`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_greater`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_dot`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+newlines 
+identifier `glyph`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+newlines 
+if `if`
+newlines 
+left_paren `(`
+newlines 
+identifier `glyph`
+equals_equals `==`
+identifier `type_dot`
+and_logical `&&`
+newlines 
+identifier `glyphs`
+left_bracket `[`
+identifier `idx`
+plus `+`
+integer `1`
+right_bracket `]`
+equals_equals `==`
+identifier `type_dot`
+newlines 
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_ellipsis`
+comma `,`
+identifier `idx`
+plus `+`
+integer `2`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_dot`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+comment `/*
+ NOTE: newlines may not be coelesced on some platforms
+*/`
+newlines 
+newlines 
+identifier `function`
+identifier `match_newlines`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+identifier `idx`
+right_bracket `]`
+not_equal `!=`
+identifier `type_newline`
+right_paren `)`
+newlines 
+return `return`
+integer `0`
+newlines 
+while `while`
+left_paren `(`
+identifier `true`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+not_equal `!=`
+identifier `type_newline`
+right_paren `)`
+newlines 
+break `break`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_newline`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_spaces`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+while `while`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+equals_equals `==`
+identifier `type_space`
+right_paren `)`
+newlines 
+continue `continue`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_discardable`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_tabs`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+while `while`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+equals_equals `==`
+identifier `type_tab`
+right_paren `)`
+newlines 
+continue `continue`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_discardable`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_integer`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+if `if`
+left_paren `(`
+not `!`
+identifier `isdigit`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+identifier `idx`
+right_bracket `]`
+right_paren `)`
+right_paren `)`
+newlines 
+return `return`
+identifier `null`
+newlines 
+while `while`
+left_paren `(`
+identifier `isdigit`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+right_paren `)`
+right_paren `)`
+newlines 
+continue `continue`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_integer`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_number`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `sgn`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+identifier `idx`
+right_bracket `]`
+newlines 
+if `if`
+left_paren `(`
+identifier `sgn`
+equals_equals `==`
+identifier `type_minus`
+or_logical `||`
+identifier `sgn`
+equals_equals `==`
+identifier `type_plus`
+right_paren `)`
+newlines 
+plus_plus `++`
+identifier `idx`
+newlines 
+identifier `var`
+identifier `real`
+comma `,`
+identifier `integer`
+equals `=`
+identifier `match_integer`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+identifier `integer`
+right_paren `)`
+newlines 
+identifier `idx`
+equals `=`
+identifier `integer`
+dot `.`
+identifier `index`
+newlines 
+identifier `var`
+identifier `dotted`
+equals `=`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+identifier `idx`
+right_bracket `]`
+equals_equals `==`
+identifier `type_dot`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+identifier `dotted`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `real`
+equals `=`
+identifier `match_integer`
+left_paren `(`
+plus_plus `++`
+identifier `idx`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+identifier `real`
+right_paren `)`
+newlines 
+identifier `idx`
+equals `=`
+identifier `real`
+dot `.`
+identifier `index`
+newlines 
+right_brace `}`
+newlines 
+if `if`
+left_paren `(`
+not `!`
+identifier `integer`
+and_logical `&&`
+not `!`
+identifier `real`
+right_paren `)`
+newlines 
+return `return`
+identifier `null`
+newlines 
+identifier `var`
+identifier `scientific`
+equals `=`
+left_paren `(`
+identifier `tolower`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+identifier `idx`
+right_bracket `]`
+right_paren `)`
+equals_equals `==`
+identifier `char`
+left_paren `(`
+quote `"e"`
+right_paren `)`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+identifier `scientific`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `sgn`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+newlines 
+if `if`
+left_paren `(`
+identifier `sgn`
+equals_equals `==`
+identifier `type_minus`
+or_logical `||`
+identifier `sgn`
+equals_equals `==`
+identifier `type_plus`
+right_paren `)`
+newlines 
+plus_plus `++`
+identifier `idx`
+newlines 
+identifier `var`
+identifier `exponent`
+equals `=`
+identifier `match_integer`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+not `!`
+identifier `exponent`
+right_paren `)`
+newlines 
+return `return`
+identifier `null`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_scientific`
+comma `,`
+identifier `exponent`
+dot `.`
+identifier `index`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+if `if`
+left_paren `(`
+identifier `dotted`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_real`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_integer`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_digit_zero`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+newlines 
+identifier `X`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"X"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `A`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"A"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `F`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"F"`
+right_paren `)`
+comma `,`
+newlines 
+identifier `next`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+newlines 
+comment `/*
+ TODO: handle octal characters
+*/`
+newlines 
+if `if`
+left_paren `(`
+identifier `isdigit`
+left_paren `(`
+identifier `next`
+right_paren `)`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+while `while`
+left_paren `(`
+identifier `isdigit`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+right_paren `)`
+right_paren `)`
+newlines 
+continue `continue`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_octal`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+if `if`
+left_paren `(`
+identifier `toupper`
+left_paren `(`
+identifier `next`
+right_paren `)`
+not_equal `!=`
+identifier `X`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_number`
+left_paren `(`
+identifier `idx`
+minus `-`
+integer `1`
+right_paren `)`
+newlines 
+identifier `var`
+newlines 
+identifier `start`
+equals `=`
+identifier `idx`
+newlines 
+for `for`
+left_paren `(`
+semicolon `;`
+semicolon `;`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `next`
+equals `=`
+identifier `toupper`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+not `!`
+identifier `isdigit`
+left_paren `(`
+identifier `next`
+right_paren `)`
+or_logical `||`
+identifier `next`
+less `<`
+identifier `A`
+or_logical `||`
+identifier `next`
+greater `>`
+identifier `F`
+right_paren `)`
+newlines 
+break `break`
+newlines 
+right_brace `}`
+newlines 
+if `if`
+left_paren `(`
+identifier `idx`
+equals_equals `==`
+identifier `start`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_undefined`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_hex`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `token_at`
+left_paren `(`
+identifier `pos`
+comma `,`
+identifier `len`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `res`
+equals `=`
+quote `""`
+newlines 
+identifier `var`
+identifier `rmx`
+equals `=`
+identifier `pos`
+plus `+`
+identifier `len`
+newlines 
+for `for`
+left_paren `(`
+identifier `var`
+identifier `rdx`
+equals `=`
+identifier `pos`
+semicolon `;`
+identifier `rdx`
+less `<`
+identifier `rmx`
+semicolon `;`
+plus_plus `++`
+identifier `rdx`
+right_paren `)`
+newlines 
+identifier `res`
+plus_assign `+=`
+identifier `text`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+identifier `rdx`
+right_bracket `]`
+right_paren `)`
+newlines 
+return `return`
+identifier `res`
+newlines 
+right_brace `}`
+newlines 
+comment `/*
+ Functions `signature` and `define` pulled 
+ out of match_identifier for efficiency
+*/`
+newlines 
+identifier `function`
+identifier `signature`
+left_paren `(`
+identifier `text`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `sig`
+equals `=`
+integer `0`
+comma `,`
+identifier `len`
+equals `=`
+identifier `text`
+dot `.`
+identifier `length`
+newlines 
+if `if`
+left_paren `(`
+identifier `len`
+greater `>`
+identifier `magic`
+right_paren `)`
+newlines 
+identifier `len`
+equals `=`
+identifier `magic`
+newlines 
+for `for`
+left_paren `(`
+identifier `var`
+identifier `tdx`
+equals `=`
+integer `0`
+semicolon `;`
+identifier `tdx`
+less `<`
+identifier `len`
+semicolon `;`
+plus_plus `++`
+identifier `tdx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `sig`
+shift_left_assign `<<=`
+integer `8`
+newlines 
+identifier `sig`
+plus_assign `+=`
+identifier `char`
+left_paren `(`
+identifier `text`
+comma `,`
+identifier `tdx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+return `return`
+identifier `sig`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `define`
+left_paren `(`
+identifier `tag`
+comma `,`
+identifier `type`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `length`
+equals `=`
+identifier `tag`
+dot `.`
+identifier `length`
+newlines 
+if `if`
+left_paren `(`
+identifier `length`
+greater `>`
+identifier `this`
+dot `.`
+identifier `longest`
+right_paren `)`
+newlines 
+identifier `this`
+dot `.`
+identifier `longest`
+equals `=`
+identifier `length`
+newlines 
+identifier `this`
+dot `.`
+identifier `push`
+left_paren `(`
+left_brace `{`
+newlines 
+identifier `tag`
+colon `:`
+identifier `tag`
+comma `,`
+newlines 
+identifier `hash`
+colon `:`
+identifier `signature`
+left_paren `(`
+identifier `tag`
+right_paren `)`
+comma `,`
+newlines 
+identifier `type`
+colon `:`
+identifier `type`
+comma `,`
+newlines 
+identifier `length`
+colon `:`
+identifier `length`
+newlines 
+right_brace `}`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `lookup`
+left_paren `(`
+identifier `tag`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `keywords`
+equals `=`
+identifier `this`
+comma `,`
+newlines 
+identifier `hash`
+equals `=`
+identifier `signature`
+left_paren `(`
+identifier `tag`
+right_paren `)`
+newlines 
+comment `/*
+ Simple binary search
+*/`
+newlines 
+identifier `var`
+identifier `low`
+equals `=`
+integer `0`
+comma `,`
+identifier `hi`
+equals `=`
+identifier `keywords`
+dot `.`
+identifier `length`
+minus `-`
+integer `1`
+newlines 
+while `while`
+left_paren `(`
+identifier `low`
+less_or_equal `<=`
+identifier `hi`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `pvt`
+equals `=`
+left_paren `(`
+left_paren `(`
+identifier `hi`
+plus `+`
+identifier `low`
+right_paren `)`
+shift_right `>>`
+integer `1`
+right_paren `)`
+comma `,`
+newlines 
+identifier `key`
+equals `=`
+identifier `keywords`
+left_bracket `[`
+identifier `pvt`
+right_bracket `]`
+comma `,`
+newlines 
+identifier `dif`
+equals `=`
+identifier `key`
+dot `.`
+identifier `hash`
+minus `-`
+identifier `hash`
+newlines 
+if `if`
+left_paren `(`
+identifier `dif`
+less `<`
+integer `0`
+right_paren `)`
+newlines 
+identifier `low`
+equals `=`
+identifier `pvt`
+plus `+`
+integer `1`
+newlines 
+else `else`
+if `if`
+left_paren `(`
+identifier `dif`
+greater `>`
+integer `0`
+right_paren `)`
+newlines 
+identifier `hi`
+equals `=`
+identifier `pvt`
+minus `-`
+integer `1`
+newlines 
+else `else`
+newlines 
+left_brace `{`
+newlines 
+if `if`
+left_paren `(`
+identifier `tag`
+dot `.`
+identifier `length`
+not_equal `!=`
+identifier `key`
+dot `.`
+identifier `length`
+or_logical `||`
+identifier `tag`
+not_equal `!=`
+identifier `key`
+dot `.`
+identifier `tag`
+right_paren `)`
+newlines 
+return `return`
+identifier `null`
+newlines 
+return `return`
+identifier `key`
+newlines 
+right_brace `}`
+newlines 
+right_brace `}`
+newlines 
+return `return`
+identifier `null`
+newlines 
+right_brace `}`
+newlines 
+newlines 
+identifier `function`
+identifier `match_identifier`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `start`
+equals `=`
+identifier `idx`
+newlines 
+identifier `var`
+identifier `uds`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"_"`
+right_paren `)`
+newlines 
+for `for`
+left_paren `(`
+semicolon `;`
+semicolon `;`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `ch`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+plus_plus `++`
+identifier `idx`
+right_bracket `]`
+newlines 
+if `if`
+left_paren `(`
+not `!`
+identifier `isdigit`
+left_paren `(`
+identifier `ch`
+right_paren `)`
+and_logical `&&`
+not `!`
+identifier `isalpha`
+left_paren `(`
+identifier `ch`
+right_paren `)`
+and_logical `&&`
+identifier `ch`
+not_equal `!=`
+identifier `uds`
+right_paren `)`
+newlines 
+break `break`
+newlines 
+right_brace `}`
+newlines 
+identifier `var`
+identifier `keywords`
+equals `=`
+identifier `match_identifier`
+dot `.`
+identifier `keywords`
+newlines 
+if `if`
+left_paren `(`
+identifier `keywords`
+equals_equals `==`
+identifier `null`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `keywords`
+equals `=`
+identifier `match_identifier`
+dot `.`
+identifier `keywords`
+equals `=`
+left_bracket `[`
+right_bracket `]`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `longest`
+equals `=`
+integer `0`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `lookup`
+equals `=`
+identifier `lookup`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `define`
+equals `=`
+identifier `define`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `define`
+left_paren `(`
+quote `"do"`
+comma `,`
+identifier `type_do`
+right_paren `)`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `define`
+left_paren `(`
+quote `"while"`
+comma `,`
+identifier `type_while`
+right_paren `)`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `define`
+left_paren `(`
+quote `"until"`
+comma `,`
+identifier `type_until`
+right_paren `)`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `define`
+left_paren `(`
+quote `"for"`
+comma `,`
+identifier `type_for`
+right_paren `)`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `define`
+left_paren `(`
+quote `"if"`
+comma `,`
+identifier `type_if`
+right_paren `)`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `define`
+left_paren `(`
+quote `"unless"`
+comma `,`
+identifier `type_unless`
+right_paren `)`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `define`
+left_paren `(`
+quote `"else"`
+comma `,`
+identifier `type_else`
+right_paren `)`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `define`
+left_paren `(`
+quote `"break"`
+comma `,`
+identifier `type_break`
+right_paren `)`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `define`
+left_paren `(`
+quote `"continue"`
+comma `,`
+identifier `type_continue`
+right_paren `)`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `define`
+left_paren `(`
+quote `"throw"`
+comma `,`
+identifier `type_throw`
+right_paren `)`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `define`
+left_paren `(`
+quote `"catch"`
+comma `,`
+identifier `type_catch`
+right_paren `)`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `define`
+left_paren `(`
+quote `"return"`
+comma `,`
+identifier `type_return`
+right_paren `)`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `define`
+left_paren `(`
+quote `"end"`
+comma `,`
+identifier `type_end`
+right_paren `)`
+newlines 
+identifier `var`
+identifier `comparison`
+equals `=`
+identifier `function`
+left_paren `(`
+identifier `left`
+comma `,`
+identifier `right`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+return `return`
+identifier `left`
+dot `.`
+identifier `hash`
+minus `-`
+identifier `right`
+dot `.`
+identifier `hash`
+newlines 
+right_brace `}`
+newlines 
+identifier `keywords`
+dot `.`
+identifier `sort`
+left_paren `(`
+identifier `comparison`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+comment `/*
+ Skip sequences longer than a keyword, 
+ otherwise do a quick binary search... 
+*/`
+newlines 
+identifier `var`
+identifier `length`
+equals `=`
+identifier `idx`
+minus `-`
+identifier `start`
+comma `,`
+newlines 
+identifier `longest`
+equals `=`
+identifier `keywords`
+dot `.`
+identifier `longest`
+newlines 
+if `if`
+left_paren `(`
+identifier `length`
+greater `>`
+identifier `longest`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_identifier`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+identifier `var`
+identifier `found`
+equals `=`
+identifier `keywords`
+dot `.`
+identifier `lookup`
+left_paren `(`
+identifier `token_at`
+left_paren `(`
+identifier `start`
+comma `,`
+identifier `length`
+right_paren `)`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+identifier `found`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `found`
+dot `.`
+identifier `type`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_identifier`
+comma `,`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `matched`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `glyphs`
+left_bracket `[`
+identifier `idx`
+right_bracket `]`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_undefined`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_undefined`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `match_but_discard`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+return `return`
+identifier `match_token`
+left_paren `(`
+identifier `type_discardable`
+comma `,`
+identifier `idx`
+plus `+`
+integer `1`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+comment `/*
+ TODO: handle utf-8 
+*/`
+newlines 
+identifier `function`
+identifier `match_specials`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+return `return`
+identifier `match_undefined`
+left_paren `(`
+identifier `idx`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `var`
+identifier `tokenizers`
+equals `=`
+left_bracket `[`
+right_bracket `]`
+newlines 
+for `for`
+left_paren `(`
+identifier `var`
+identifier `tdx`
+equals `=`
+integer `0`
+semicolon `;`
+identifier `tdx`
+less_or_equal `<=`
+integer `255`
+semicolon `;`
+plus_plus `++`
+identifier `tdx`
+right_paren `)`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `tdx`
+right_bracket `]`
+equals `=`
+identifier `match_undefined`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_equals`
+right_bracket `]`
+equals `=`
+identifier `match_equals`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_not`
+right_bracket `]`
+equals `=`
+identifier `match_not`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_at`
+right_bracket `]`
+equals `=`
+identifier `matched`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_modulus`
+right_bracket `]`
+equals `=`
+identifier `match_modulus`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_caret`
+right_bracket `]`
+equals `=`
+identifier `match_caret`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_and`
+right_bracket `]`
+equals `=`
+identifier `match_and`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_or`
+right_bracket `]`
+equals `=`
+identifier `match_or`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_times`
+right_bracket `]`
+equals `=`
+identifier `match_times`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_minus`
+right_bracket `]`
+equals `=`
+identifier `match_minus`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_plus`
+right_bracket `]`
+equals `=`
+identifier `match_plus`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_divide`
+right_bracket `]`
+equals `=`
+identifier `match_divide`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_less`
+right_bracket `]`
+equals `=`
+identifier `match_less`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_greater`
+right_bracket `]`
+equals `=`
+identifier `match_greater`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_dot`
+right_bracket `]`
+equals `=`
+identifier `match_dot`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_tilde`
+right_bracket `]`
+equals `=`
+identifier `matched`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_pound`
+right_bracket `]`
+equals `=`
+identifier `matched`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_dollar`
+right_bracket `]`
+equals `=`
+identifier `matched`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_left_paren`
+right_bracket `]`
+equals `=`
+identifier `matched`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_right_paren`
+right_bracket `]`
+equals `=`
+identifier `matched`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_left_brace`
+right_bracket `]`
+equals `=`
+identifier `matched`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_right_brace`
+right_bracket `]`
+equals `=`
+identifier `matched`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_left_bracket`
+right_bracket `]`
+equals `=`
+identifier `matched`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_right_bracket`
+right_bracket `]`
+equals `=`
+identifier `matched`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_comma`
+right_bracket `]`
+equals `=`
+identifier `matched`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_colon`
+right_bracket `]`
+equals `=`
+identifier `matched`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_conditional`
+right_bracket `]`
+equals `=`
+identifier `matched`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_semicolon`
+right_bracket `]`
+equals `=`
+identifier `matched`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_newline`
+right_bracket `]`
+equals `=`
+identifier `match_newlines`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_carriage_return`
+right_bracket `]`
+equals `=`
+identifier `match_but_discard`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_tab`
+right_bracket `]`
+equals `=`
+identifier `match_tabs`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_space`
+right_bracket `]`
+equals `=`
+identifier `match_spaces`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_single_quote`
+right_bracket `]`
+equals `=`
+identifier `match_single_quote`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `type_double_quote`
+right_bracket `]`
+equals `=`
+identifier `match_double_quote`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `char`
+left_paren `(`
+quote `"0"`
+right_paren `)`
+right_bracket `]`
+equals `=`
+identifier `match_digit_zero`
+newlines 
+for `for`
+left_paren `(`
+identifier `var`
+identifier `idx`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"1"`
+right_paren `)`
+comma `,`
+identifier `imx`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"9"`
+right_paren `)`
+semicolon `;`
+identifier `idx`
+less_or_equal `<=`
+identifier `imx`
+semicolon `;`
+plus_plus `++`
+identifier `idx`
+right_paren `)`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `idx`
+right_bracket `]`
+equals `=`
+identifier `match_number`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `char`
+left_paren `(`
+quote `"_"`
+right_paren `)`
+right_bracket `]`
+equals `=`
+identifier `match_identifier`
+newlines 
+for `for`
+left_paren `(`
+identifier `var`
+identifier `idx`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"a"`
+right_paren `)`
+comma `,`
+identifier `imx`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"z"`
+right_paren `)`
+semicolon `;`
+identifier `idx`
+less_or_equal `<=`
+identifier `imx`
+semicolon `;`
+plus_plus `++`
+identifier `idx`
+right_paren `)`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `idx`
+right_bracket `]`
+equals `=`
+identifier `match_identifier`
+newlines 
+for `for`
+left_paren `(`
+identifier `var`
+identifier `idx`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"A"`
+right_paren `)`
+comma `,`
+identifier `imx`
+equals `=`
+identifier `char`
+left_paren `(`
+quote `"Z"`
+right_paren `)`
+semicolon `;`
+identifier `idx`
+less_or_equal `<=`
+identifier `imx`
+semicolon `;`
+plus_plus `++`
+identifier `idx`
+right_paren `)`
+newlines 
+identifier `tokenizers`
+left_bracket `[`
+identifier `idx`
+right_bracket `]`
+equals `=`
+identifier `match_identifier`
+newlines 
+comment `/*
+ WORKAROUND: cosi's text_to_array is too slow
+ ...use non-utf-8 shim until that gets fixed 
+*/`
+newlines 
+identifier `function`
+identifier `text_to_array`
+left_paren `(`
+identifier `text`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `byte`
+comma `,`
+identifier `bdx`
+equals `=`
+integer `0`
+comma `,`
+newlines 
+identifier `len`
+equals `=`
+identifier `text`
+dot `.`
+identifier `length`
+comma `,`
+newlines 
+identifier `res`
+equals `=`
+identifier `new`
+identifier `Array`
+left_paren `(`
+identifier `len`
+right_paren `)`
+comma `,`
+newlines 
+identifier `bytes`
+equals `=`
+identifier `text_to_bytes`
+left_paren `(`
+identifier `text`
+right_paren `)`
+newlines 
+for `for`
+left_paren `(`
+semicolon `;`
+semicolon `;`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `byte`
+equals `=`
+identifier `get_byte`
+left_paren `(`
+identifier `bytes`
+comma `,`
+identifier `bdx`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+identifier `byte`
+equals_equals `==`
+integer `0`
+right_paren `)`
+newlines 
+break `break`
+newlines 
+identifier `res`
+left_bracket `[`
+identifier `bdx`
+plus_plus `++`
+right_bracket `]`
+equals `=`
+identifier `byte`
+newlines 
+right_brace `}`
+newlines 
+identifier `free`
+left_paren `(`
+identifier `bytes`
+right_paren `)`
+newlines 
+identifier `verify`
+left_paren `(`
+identifier `bdx`
+equals_equals `==`
+identifier `text`
+dot `.`
+identifier `length`
+comma `,`
+quote `"UTF-8 not yet supported"`
+right_paren `)`
+newlines 
+return `return`
+identifier `res`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `tokenize`
+left_paren `(`
+identifier `text`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `tokens`
+equals `=`
+left_bracket `[`
+right_bracket `]`
+comma `,`
+identifier `current`
+equals `=`
+integer `0`
+newlines 
+identifier `glyphs`
+equals `=`
+identifier `tokens`
+dot `.`
+identifier `glyphs`
+equals `=`
+identifier `text_to_array`
+left_paren `(`
+identifier `text`
+right_paren `)`
+newlines 
+identifier `var`
+identifier `count`
+equals `=`
+identifier `glyphs`
+dot `.`
+identifier `length`
+newlines 
+while `while`
+left_paren `(`
+identifier `current`
+less `<`
+identifier `count`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `glyph`
+equals `=`
+identifier `glyphs`
+left_bracket `[`
+identifier `current`
+right_bracket `]`
+newlines 
+identifier `var`
+identifier `scan`
+equals `=`
+left_paren `(`
+identifier `glyph`
+greater_or_equal `>=`
+integer `256`
+right_paren `)`
+conditional `?`
+newlines 
+identifier `match_specials`
+colon `:`
+identifier `tokenizers`
+left_bracket `[`
+identifier `glyph`
+right_bracket `]`
+newlines 
+identifier `var`
+identifier `result`
+equals `=`
+identifier `scan`
+left_paren `(`
+identifier `current`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+not `!`
+identifier `result`
+right_paren `)`
+newlines 
+identifier `result`
+equals `=`
+identifier `match_undefined`
+left_paren `(`
+identifier `current`
+right_paren `)`
+newlines 
+identifier `var`
+identifier `type`
+equals `=`
+identifier `result`
+dot `.`
+identifier `type`
+newlines 
+identifier `var`
+identifier `length`
+equals `=`
+identifier `result`
+dot `.`
+identifier `index`
+minus `-`
+identifier `current`
+newlines 
+if `if`
+left_paren `(`
+identifier `type`
+not_equal `!=`
+identifier `type_discardable`
+right_paren `)`
+newlines 
+identifier `tokens`
+dot `.`
+identifier `push`
+left_paren `(`
+left_brace `{`
+newlines 
+identifier `type`
+colon `:`
+identifier `type`
+comma `,`
+newlines 
+identifier `index`
+colon `:`
+identifier `current`
+comma `,`
+newlines 
+identifier `length`
+colon `:`
+identifier `length`
+newlines 
+right_brace `}`
+right_paren `)`
+newlines 
+identifier `current`
+plus_assign `+=`
+identifier `length`
+newlines 
+right_brace `}`
+newlines 
+return `return`
+identifier `tokens`
+newlines 
+right_brace `}`
+newlines 
+comment `/*
+ ...WIP...
+*/`
+newlines 
+identifier `function`
+identifier `parse`
+left_paren `(`
+identifier `input`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+if `if`
+left_paren `(`
+identifier `input`
+identifier `instanceof`
+identifier `String`
+right_paren `)`
+newlines 
+return `return`
+identifier `parse`
+left_paren `(`
+identifier `tokenize`
+left_paren `(`
+identifier `input`
+right_paren `)`
+right_paren `)`
+newlines 
+identifier `print`
+left_paren `(`
+quote `"Parser"`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+comment `/*
+ Test
+*/`
+newlines 
+identifier `function`
+identifier `truncate`
+left_paren `(`
+identifier `value`
+comma `,`
+identifier `significant`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `scale`
+equals `=`
+identifier `pow`
+left_paren `(`
+integer `10`
+comma `,`
+identifier `significant`
+or_logical `||`
+integer `4`
+right_paren `)`
+newlines 
+return `return`
+identifier `floor`
+left_paren `(`
+identifier `value`
+times `*`
+identifier `scale`
+right_paren `)`
+divide `/`
+identifier `scale`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `tick`
+left_paren `(`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+return `return`
+identifier `clock`
+left_paren `(`
+right_paren `)`
+divide `/`
+identifier `CLOCKS_PER_SEC`
+newlines 
+right_brace `}`
+newlines 
+identifier `function`
+identifier `process`
+left_paren `(`
+identifier `file`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `text`
+equals `=`
+identifier `file_to_text`
+left_paren `(`
+identifier `file`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+identifier `text`
+equals_equals `==`
+identifier `null`
+right_paren `)`
+newlines 
+return `return`
+identifier `print`
+left_paren `(`
+quote `"Error: cannot open file '"`
+comma `,`
+identifier `file`
+comma `,`
+quote `"'"`
+right_paren `)`
+newlines 
+identifier `var`
+identifier `start`
+equals `=`
+identifier `tick`
+left_paren `(`
+right_paren `)`
+comma `,`
+newlines 
+identifier `tokens`
+equals `=`
+identifier `tokenize`
+left_paren `(`
+identifier `text`
+right_paren `)`
+comma `,`
+newlines 
+identifier `elapsed`
+equals `=`
+identifier `truncate`
+left_paren `(`
+identifier `tick`
+left_paren `(`
+right_paren `)`
+minus `-`
+identifier `start`
+right_paren `)`
+newlines 
+identifier `var`
+identifier `code`
+equals `=`
+identifier `parse`
+left_paren `(`
+identifier `tokens`
+right_paren `)`
+newlines 
+for `for`
+left_paren `(`
+identifier `var`
+identifier `tdx`
+equals `=`
+integer `0`
+comma `,`
+identifier `len`
+equals `=`
+identifier `tokens`
+dot `.`
+identifier `length`
+semicolon `;`
+identifier `tdx`
+less `<`
+identifier `len`
+semicolon `;`
+plus_plus `++`
+identifier `tdx`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `token`
+equals `=`
+identifier `tokens`
+left_bracket `[`
+identifier `tdx`
+right_bracket `]`
+comma `,`
+newlines 
+identifier `type`
+equals `=`
+identifier `token`
+dot `.`
+identifier `type`
+comma `,`
+newlines 
+identifier `label`
+equals `=`
+identifier `type_to_text`
+left_paren `(`
+identifier `type`
+right_paren `)`
+comma `,`
+newlines 
+identifier `isn`
+equals `=`
+left_paren `(`
+identifier `type`
+equals_equals `==`
+identifier `type_newline`
+right_paren `)`
+comma `,`
+newlines 
+identifier `literal`
+equals `=`
+identifier `token_at`
+left_paren `(`
+identifier `token`
+dot `.`
+identifier `index`
+comma `,`
+identifier `token`
+dot `.`
+identifier `length`
+right_paren `)`
+newlines 
+identifier `print`
+left_paren `(`
+identifier `label`
+comma `,`
+identifier `isn`
+conditional `?`
+quote `""`
+colon `:`
+quote `"`"`
+plus `+`
+identifier `literal`
+plus `+`
+quote `"`"`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `print`
+newlines 
+left_paren `(`
+newlines 
+quote `"-"`
+comma `,`
+identifier `text`
+dot `.`
+identifier `length`
+comma `,`
+quote `"glyphs processed in"`
+comma `,`
+newlines 
+identifier `elapsed`
+comma `,`
+quote `"seconds -"`
+newlines 
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+identifier `contain`
+left_paren `(`
+identifier `function`
+left_paren `(`
+right_paren `)`
+left_brace `{`
+newlines 
+identifier `var`
+identifier `args`
+equals `=`
+identifier `script_arguments`
+left_paren `(`
+right_paren `)`
+newlines 
+if `if`
+left_paren `(`
+identifier `args`
+dot `.`
+identifier `length`
+equals_equals `==`
+integer `0`
+right_paren `)`
+newlines 
+return `return`
+identifier `print`
+left_paren `(`
+quote `"TORK:"`
+comma `,`
+identifier `script_path`
+left_paren `(`
+right_paren `)`
+comma `,`
+quote `"[files...]"`
+right_paren `)`
+newlines 
+for `for`
+left_paren `(`
+identifier `var`
+identifier `idx`
+identifier `in`
+identifier `args`
+right_paren `)`
+newlines 
+left_brace `{`
+newlines 
+identifier `var`
+identifier `arg`
+equals `=`
+identifier `args`
+left_bracket `[`
+identifier `idx`
+right_bracket `]`
+newlines 
+identifier `print`
+left_paren `(`
+identifier `arg`
+right_paren `)`
+newlines 
+identifier `process`
+left_paren `(`
+identifier `arg`
+right_paren `)`
+newlines 
+right_brace `}`
+newlines 
+right_brace `}`
+right_paren `)`
+newlines 
+- 18315 glyphs processed in 0.573 seconds -
